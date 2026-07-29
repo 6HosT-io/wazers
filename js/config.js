@@ -4,7 +4,7 @@
 const SITE_CONFIG = {
   // Set to true to enable Work in Progress / Maintenance mode
   // When true, visitors are redirected to maintenance.html
-  MAINTENANCE_MODE: true,
+  MAINTENANCE_MODE: false,
 
   // Facebook Page
   FACEBOOK_PAGE: 'https://www.facebook.com/WazeLV',
