@@ -12,10 +12,10 @@
       darkMode: 'class', theme: { extend: { colors: { waze: '#0099FF', latvia: '#9E3039' } } } }
   </script>
 </head>
-<body class="bg-white text-slate-900">
+<body class="page page-news">
 
   <!-- Header (same as index) -->
-  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+  <header class="site-header">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="flex items-center justify-between h-16">
         <a href="index.html" class="flex items-center gap-2 font-bold text-lg">
@@ -56,12 +56,12 @@
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-    <h1 class="text-3xl font-bold mb-2">
+  <main class="page-content">
+    <h1 class="page-title">
       <span data-lang="lv">Jaunumi</span>
       <span data-lang="en">News</span>
     </h1>
-    <p class="text-slate-600 mb-10">
+    <p class="page-intro">
       <span data-lang="lv">Kartes atjauninājumi, kopienas ziņas un padomi no Waze Latvija.</span>
       <span data-lang="en">Map updates, community news and tips from Waze Latvia.</span>
     </p>
@@ -90,12 +90,12 @@
 
     <!-- Manual news cards example -->
     <div class="mt-12 grid md:grid-cols-2 gap-6">
-      <article class="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
+      <article class="card">
         <div class="text-xs text-slate-400 mb-2">2026. gada maijs</div>
         <h2 class="font-bold text-lg mb-2">Jauns kartes atjauninājums Rīgā</h2>
         <p class="text-slate-600 text-sm">Pievienotas jaunas ielas un labotas vienvirziena ielas centrā.</p>
       </article>
-      <article class="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
+      <article class="card">
         <div class="text-xs text-slate-400 mb-2">2026. gada aprīlis</div>
         <h2 class="font-bold text-lg mb-2">Kopienas tikšanās</h2>
         <p class="text-slate-600 text-sm">Paldies visiem, kas piedalījās pēdējā Waze Cafe!</p>
@@ -104,7 +104,7 @@
   </main>
 
   <!-- Footer -->
-  <footer class="bg-slate-900 text-slate-300 mt-16">
+  <footer class="site-footer">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
       <div class="grid md:grid-cols-3 gap-8">
         <div>

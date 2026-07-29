@@ -113,6 +113,27 @@ wazers-lv/
 
 ---
 
+
+## CSS class structure (clean naming)
+
+| Class | Purpose |
+|-------|---------|
+| `page` + `page-home` / `page-news` / … | Body of each page |
+| `site-header` | Top navigation bar |
+| `site-footer` | Footer |
+| `main-banner` | Homepage hero/banner |
+| `main-banner-title` / `main-banner-subtitle` | Banner text (with outline) |
+| `section-stats` | Stats/counter strip |
+| `section-map` | Live Waze map block |
+| `section-cards` | Quick-link cards |
+| `section-partners` | Partners block |
+| `page-content` | Main content area on inner pages |
+| `page-title` / `page-intro` | Page heading + intro text |
+| `card` | Content / link cards |
+| `waze-map` | Live map container |
+| `btn-primary` / `btn-secondary` | Buttons |
+
+
 ## Colors
 
 - **Waze Blue:** `#0099FF`

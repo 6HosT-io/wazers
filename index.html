@@ -23,10 +23,10 @@
     }
   </script>
 </head>
-<body class="bg-white text-slate-900">
+<body class="page page-home">
 
   <!-- Header -->
-  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+  <header class="site-header">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
@@ -111,8 +111,8 @@
   </section>
 
   <!-- Stats / Counter -->
-  <section class="bg-slate-50 border-y border-slate-100">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+  <section class="section-stats">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
         <div>
           <div class="text-3xl font-bold text-waze">1 200+</div>
@@ -147,34 +147,34 @@
   </section>
 
   <!-- Waze Live Map -->
-  <section class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
-    <div class="text-center mb-8">
-      <h2 class="text-2xl md:text-3xl font-bold mb-2">
-        <span data-lang="lv">Dzīvā Waze karte</span>
-        <span data-lang="en">Live Waze Map</span>
-      </h2>
-      <p class="text-slate-600">
-        <span data-lang="lv">Reāllaika satiksme Latvijā</span>
-        <span data-lang="en">Real-time traffic in Latvia</span>
-      </p>
-    </div>
-    <div class="waze-map relative w-full overflow-hidden rounded-xl bg-slate-100" style="padding-bottom: 56.25%; /* 16:9 */ min-height: 320px;">
-      <iframe 
-        src="https://embed.waze.com/iframe?zoom=10&lat=56.9496&lon=24.1052&pin=1" 
-        class="absolute top-0 left-0 w-full h-full"
-        style="border:0; min-height: 320px;"
-        allowfullscreen
-        loading="lazy"
-        title="Waze Live Map – Latvia">
-      </iframe>
+  <section class="section-map">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-8">
+        <h2 class="section-title">
+          <span data-lang="lv">Dzīvā Waze karte</span>
+          <span data-lang="en">Live Waze Map</span>
+        </h2>
+        <p class="section-subtitle">
+          <span data-lang="lv">Reāllaika satiksme Latvijā</span>
+          <span data-lang="en">Real-time traffic in Latvia</span>
+        </p>
+      </div>
+      <div class="waze-map">
+        <iframe 
+          src="https://embed.waze.com/iframe?zoom=10&lat=56.9496&lon=24.1052&pin=1" 
+          allowfullscreen
+          loading="lazy"
+          title="Waze Live Map – Latvia">
+        </iframe>
+      </div>
     </div>
   </section>
 
   <!-- Quick links / Cards -->
-  <section class="bg-slate-50 py-16">
+  <section class="section-cards">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="grid md:grid-cols-3 gap-6">
-        <a href="jaunumi.html" class="card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+        <a href="jaunumi.html" class="card">
           <div class="text-3xl mb-3">📰</div>
           <h3 class="font-bold text-lg mb-2">
             <span data-lang="lv">Jaunumi</span>
@@ -185,7 +185,7 @@
             <span data-lang="en">Follow map updates and community news.</span>
           </p>
         </a>
-        <a href="notikumi.html" class="card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+        <a href="notikumi.html" class="card">
           <div class="text-3xl mb-3">📅</div>
           <h3 class="font-bold text-lg mb-2">
             <span data-lang="lv">Notikumi</span>
@@ -196,7 +196,7 @@
             <span data-lang="en">Road closures, meetups and mapathons.</span>
           </p>
         </a>
-        <a href="palidziba.html" class="card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+        <a href="palidziba.html" class="card">
           <div class="text-3xl mb-3">❓</div>
           <h3 class="font-bold text-lg mb-2">
             <span data-lang="lv">Palīdzība</span>
@@ -211,8 +211,9 @@
     </div>
   </section>
 
-  <!-- Partners teaser -->
-  <section class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+  <!-- Partners -->
+  <section class="section-partners">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
     <div class="text-center mb-8">
       <h2 class="text-2xl font-bold mb-2">
         <span data-lang="lv">Partneri</span>
@@ -237,10 +238,11 @@
         Partneris 4
       </div>
     </div>
+    </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-slate-900 text-slate-300">
+  <footer class="site-footer">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
       <div class="grid md:grid-cols-3 gap-8">
         <div>

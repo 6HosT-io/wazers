@@ -12,9 +12,9 @@
       darkMode: 'class', theme: { extend: { colors: { waze: '#0099FF', latvia: '#9E3039' } } } }
   </script>
 </head>
-<body class="bg-white text-slate-900">
+<body class="page page-events">
 
-  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+  <header class="site-header">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="flex items-center justify-between h-16">
         <a href="index.html" class="flex items-center gap-2 font-bold text-lg">
@@ -55,19 +55,19 @@
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-    <h1 class="text-3xl font-bold mb-2">
+  <main class="page-content">
+    <h1 class="page-title">
       <span data-lang="lv">Notikumi</span>
       <span data-lang="en">Events</span>
     </h1>
-    <p class="text-slate-600 mb-10">
+    <p class="page-intro">
       <span data-lang="lv">Ceļu slēgumi, kartes maratoni, redaktoru tikšanās un citi svarīgi notikumi.</span>
       <span data-lang="en">Road closures, mapathons, editor meetups and other important events.</span>
     </p>
 
     <!-- Simple event list -->
     <div class="space-y-4">
-      <div class="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm flex flex-col sm:flex-row sm:items-center gap-4">
+      <div class="card" style="display:flex;flex-direction:column;gap:1rem;">
         <div class="flex-shrink-0 w-16 h-16 bg-waze/10 rounded-xl flex items-center justify-center text-waze font-bold">
           <div class="text-center leading-tight">
             <div class="text-xs">JUN</div>
@@ -81,7 +81,7 @@
         <span class="text-xs font-medium px-3 py-1 rounded-full bg-green-100 text-green-700">Plānots</span>
       </div>
 
-      <div class="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm flex flex-col sm:flex-row sm:items-center gap-4">
+      <div class="card" style="display:flex;flex-direction:column;gap:1rem;">
         <div class="flex-shrink-0 w-16 h-16 bg-latvia/10 rounded-xl flex items-center justify-center text-latvia font-bold">
           <div class="text-center leading-tight">
             <div class="text-xs">JUL</div>
@@ -116,7 +116,7 @@
     </p>
   </main>
 
-  <footer class="bg-slate-900 text-slate-300 mt-16">
+  <footer class="site-footer">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
       <div class="grid md:grid-cols-3 gap-8">
         <div>
