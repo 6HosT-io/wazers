@@ -1,16 +1,23 @@
-// Waze Latvija - Main JS
+// Waze Latvija – Main JavaScript
 
-document.addEventListener('DOMContentLoaded', function() {
-  // Language switcher
+document.addEventListener('DOMContentLoaded', function () {
+  // ---------- Maintenance Mode ----------
+  if (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.MAINTENANCE_MODE === true) {
+    if (!window.location.pathname.endsWith('maintenance.html')) {
+      window.location.replace('maintenance.html');
+      return;
+    }
+  }
+
+  // ---------- Language Switcher ----------
   const langButtons = document.querySelectorAll('[data-set-lang]');
   const html = document.documentElement;
 
-  // Load saved language or default to LV
   const savedLang = localStorage.getItem('wazers-lang') || 'lv';
   setLanguage(savedLang);
 
   langButtons.forEach(btn => {
-    btn.addEventListener('click', function() {
+    btn.addEventListener('click', function () {
       const lang = this.getAttribute('data-set-lang');
       setLanguage(lang);
       localStorage.setItem('wazers-lang', lang);
@@ -19,34 +26,78 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function setLanguage(lang) {
     html.setAttribute('lang', lang);
-    
-    // Update button states
     langButtons.forEach(b => {
-      if (b.getAttribute('data-set-lang') === lang) {
-        b.classList.add('active', 'bg-waze', 'text-white');
-        b.classList.remove('bg-gray-100', 'text-gray-700');
-      } else {
-        b.classList.remove('active', 'bg-waze', 'text-white');
-        b.classList.add('bg-gray-100', 'text-gray-700');
-      }
+      const isActive = b.getAttribute('data-set-lang') === lang;
+      b.classList.toggle('active', isActive);
+      b.classList.toggle('bg-waze', isActive);
+      b.classList.toggle('text-white', isActive);
+      b.classList.toggle('bg-gray-100', !isActive);
+      b.classList.toggle('text-gray-700', !isActive);
+      b.classList.toggle('dark:bg-slate-700', !isActive);
+      b.classList.toggle('dark:text-slate-200', !isActive);
     });
   }
 
-  // Mobile menu toggle
+  // ---------- Dark Mode ----------
+  const darkToggle = document.getElementById('dark-mode-toggle');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function applyTheme(theme) {
+    if (theme === 'dark') {
+      html.classList.add('dark');
+    } else {
+      html.classList.remove('dark');
+    }
+    localStorage.setItem('wazers-theme', theme);
+    updateToggleIcon(theme);
+  }
+
+  function updateToggleIcon(theme) {
+    if (!darkToggle) return;
+    darkToggle.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+    darkToggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  }
+
+  // Initial theme: saved preference or system
+  const savedTheme = localStorage.getItem('wazers-theme');
+  if (savedTheme) {
+    applyTheme(savedTheme);
+  } else {
+    applyTheme(prefersDark.matches ? 'dark' : 'light');
+  }
+
+  // Manual toggle
+  if (darkToggle) {
+    darkToggle.addEventListener('click', () => {
+      const isDark = html.classList.contains('dark');
+      applyTheme(isDark ? 'light' : 'dark');
+    });
+  }
+
+  // Follow system changes only if no manual preference
+  prefersDark.addEventListener('change', (e) => {
+    if (!localStorage.getItem('wazers-theme')) {
+      applyTheme(e.matches ? 'dark' : 'light');
+    }
+  });
+
+  // ---------- Mobile Menu ----------
   const menuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
 
   if (menuBtn && mobileMenu) {
-    menuBtn.addEventListener('click', function() {
+    menuBtn.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
     });
   }
 
-  // Close mobile menu when clicking a link
-  const mobileLinks = mobileMenu ? mobileMenu.querySelectorAll('a') : [];
-  mobileLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.classList.add('hidden');
-    });
-  });
+  // ---------- Formspree support ----------
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm && typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.FORMSPREE_ENDPOINT) {
+    contactForm.setAttribute('action', SITE_CONFIG.FORMSPREE_ENDPOINT);
+    contactForm.setAttribute('method', 'POST');
+  }
 });
