@@ -1,113 +1,114 @@
-/* Waze Latvija – Custom styles + Dark mode */
+/* ============================================
+   Waze Latvija – Clean stylesheet
+   ============================================ */
 
 :root {
   --waze-blue: #0099FF;
   --latvia-red: #9E3039;
+  --text-dark: #0f172a;
+  --text-light: #f8fafc;
 }
 
+/* ---------- Base ---------- */
 html {
   scroll-behavior: smooth;
 }
 
 body {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  margin: 0;
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* ===== DARK MODE ===== */
-html.dark,
-html.dark body {
-  background-color: #0f172a !important;
-  color: #e2e8f0 !important;
+/* ---------- Brand colors ---------- */
+.bg-waze   { background-color: var(--waze-blue); }
+.text-waze { color: var(--waze-blue); }
+.bg-latvia { background-color: var(--latvia-red); }
+.text-latvia { color: var(--latvia-red); }
+
+/* ---------- Buttons ---------- */
+.btn-primary {
+  background-color: var(--waze-blue);
+  color: #fff;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+.btn-primary:hover {
+  background-color: #007acc;
+  transform: translateY(-1px);
 }
 
-html.dark header {
-  background-color: rgba(15, 23, 42, 0.95) !important;
-  border-color: #334155 !important;
+.btn-secondary {
+  background-color: var(--latvia-red);
+  color: #fff;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+.btn-secondary:hover {
+  background-color: #7a242b;
+  transform: translateY(-1px);
 }
 
-html.dark .bg-white {
-  background-color: #1e293b !important;
-}
-
-html.dark .bg-slate-50 {
-  background-color: #0f172a !important;
-}
-
-html.dark .bg-slate-100 {
-  background-color: #1e293b !important;
-}
-
-html.dark .text-slate-900 {
-  color: #f1f5f9 !important;
-}
-
-html.dark .text-slate-600,
-html.dark .text-slate-500,
-html.dark .text-slate-400 {
-  color: #94a3b8 !important;
-}
-
-html.dark .border-slate-100,
-html.dark .border-slate-200 {
-  border-color: #334155 !important;
-}
-
-html.dark .bg-slate-900 {
-  background-color: #020617 !important;
-}
-
-html.dark .shadow-sm {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4) !important;
-}
-
-html.dark .hover\:bg-slate-50:hover,
-html.dark .hover\:bg-slate-100:hover {
-  background-color: #1e293b !important;
-}
-
-html.dark input,
-html.dark textarea,
-html.dark select {
-  background-color: #1e293b !important;
-  border-color: #475569 !important;
-  color: #e2e8f0 !important;
-}
-
-/* Brand colors stay the same */
-.bg-waze { background-color: #0099FF; }
-.text-waze { color: #0099FF; }
-.bg-latvia { background-color: #9E3039; }
-.text-latvia { color: #9E3039; }
-
-/* Navigation */
+/* ---------- Navigation ---------- */
 .nav-link {
   transition: color 0.2s ease;
 }
 .nav-link:hover {
-  color: #0099FF;
+  color: var(--waze-blue);
 }
 
-/* Language buttons */
 .lang-btn {
   transition: all 0.2s ease;
 }
 .lang-btn.active {
-  background-color: #0099FF !important;
-  color: white !important;
+  background-color: var(--waze-blue) !important;
+  color: #fff !important;
 }
 
-/* Hero */
-.hero-overlay {
-  background: linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.7) 100%);
-  background: linear-gradient(135deg, rgba(0, 153, 255, 0.12) 0%, rgba(158, 48, 57, 0.08) 100%);
-}
-html.dark .hero-overlay {
-  background: linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.7) 100%);
-  background: linear-gradient(135deg, rgba(0, 153, 255, 0.08) 0%, rgba(158, 48, 57, 0.05) 100%);
+/* ---------- Main Banner (Hero) ---------- */
+.main-banner {
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
 }
 
-/* Cards */
+.main-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.82) 0%, rgba(255,255,255,0.68) 100%);
+}
+
+html.dark .main-banner-overlay {
+  background: linear-gradient(135deg, rgba(15,23,42,0.82) 0%, rgba(15,23,42,0.68) 100%);
+}
+
+/* Banner title – proper outline */
+.main-banner-title {
+  color: var(--text-dark);
+  -webkit-text-stroke: 1.5px #ffffff;
+  paint-order: stroke fill;
+  font-weight: 700;
+}
+
+html.dark .main-banner-title {
+  color: var(--text-light);
+  -webkit-text-stroke: 1.5px #ffffff;
+  paint-order: stroke fill;
+}
+
+/* Banner subtitle – lighter outline */
+.main-banner-subtitle {
+  color: #1e293b;
+  -webkit-text-stroke: 0.8px #ffffff;
+  paint-order: stroke fill;
+}
+
+html.dark .main-banner-subtitle {
+  color: #e2e8f0;
+  -webkit-text-stroke: 0.8px #ffffff;
+  paint-order: stroke fill;
+}
+
+/* ---------- Cards ---------- */
 .card-hover {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -119,41 +120,16 @@ html.dark .card-hover:hover {
   box-shadow: 0 12px 24px -8px rgba(0, 153, 255, 0.15);
 }
 
-/* Buttons */
-.btn-primary {
-  background-color: #0099FF;
-  color: white;
-  transition: background-color 0.2s ease, transform 0.15s ease;
-}
-.btn-primary:hover {
-  background-color: #007acc;
-  transform: translateY(-1px);
-}
-
-.btn-secondary {
-  background-color: #9E3039;
-  color: white;
-  transition: background-color 0.2s ease, transform 0.15s ease;
-}
-.btn-secondary:hover {
-  background-color: #7a242b;
-  transform: translateY(-1px);
-}
-
-/* Form focus */
-input:focus, textarea:focus, select:focus {
-  outline: none;
-  border-color: #0099FF;
-  box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.25);
-}
-
-/* Waze map – responsive */
+/* ---------- Waze Live Map ---------- */
 .waze-map {
+  position: relative;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  position: relative;
+  min-height: 320px;
+  padding-bottom: 56.25%; /* 16:9 */
 }
+
 .waze-map iframe {
   position: absolute;
   top: 0;
@@ -162,15 +138,15 @@ input:focus, textarea:focus, select:focus {
   height: 100%;
   border: 0;
 }
+
 html.dark .waze-map {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
-/* On very small screens keep a usable height */
 @media (max-width: 480px) {
   .waze-map {
-    min-height: 280px !important;
-    padding-bottom: 0 !important;
+    min-height: 280px;
+    padding-bottom: 0;
   }
   .waze-map iframe {
     position: relative;
@@ -178,72 +154,77 @@ html.dark .waze-map {
   }
 }
 
-/* Language visibility */
+/* ---------- Forms ---------- */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--waze-blue);
+  box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.25);
+}
+
+/* ---------- Language visibility ---------- */
 [data-lang="en"] { display: none; }
 html[lang="en"] [data-lang="lv"] { display: none; }
 html[lang="en"] [data-lang="en"] { display: block; }
 html[lang="lv"] [data-lang="lv"] { display: block; }
 html[lang="lv"] [data-lang="en"] { display: none; }
 
-span[data-lang="en"], a[data-lang="en"], button[data-lang="en"] { display: none; }
+span[data-lang="en"],
+a[data-lang="en"],
+button[data-lang="en"] { display: none; }
+
 html[lang="en"] span[data-lang="lv"],
 html[lang="en"] a[data-lang="lv"],
 html[lang="en"] button[data-lang="lv"] { display: none; }
+
 html[lang="en"] span[data-lang="en"],
 html[lang="en"] a[data-lang="en"],
 html[lang="en"] button[data-lang="en"] { display: inline; }
+
 html[lang="lv"] span[data-lang="lv"],
 html[lang="lv"] a[data-lang="lv"],
 html[lang="lv"] button[data-lang="lv"] { display: inline; }
+
 html[lang="lv"] span[data-lang="en"],
 html[lang="lv"] a[data-lang="en"],
 html[lang="lv"] button[data-lang="en"] { display: none; }
 
-/* Performance */
+/* ---------- Dark mode helpers ---------- */
+html.dark body {
+  background-color: #0f172a !important;
+  color: #e2e8f0 !important;
+}
+
+html.dark header {
+  background-color: rgba(15, 23, 42, 0.95) !important;
+  border-color: #334155 !important;
+}
+
+html.dark .bg-white { background-color: #1e293b !important; }
+html.dark .bg-slate-50 { background-color: #0f172a !important; }
+html.dark .bg-slate-100 { background-color: #1e293b !important; }
+html.dark .text-slate-900 { color: #f1f5f9 !important; }
+html.dark .text-slate-600,
+html.dark .text-slate-500,
+html.dark .text-slate-400 { color: #94a3b8 !important; }
+html.dark .border-slate-100,
+html.dark .border-slate-200 { border-color: #334155 !important; }
+html.dark .bg-slate-900 { background-color: #020617 !important; }
+html.dark .shadow-sm { box-shadow: 0 1px 3px 0 rgba(0,0,0,0.4) !important; }
+html.dark .hover\:bg-slate-50:hover,
+html.dark .hover\:bg-slate-100:hover { background-color: #1e293b !important; }
+
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background-color: #1e293b !important;
+  border-color: #475569 !important;
+  color: #e2e8f0 !important;
+}
+
+/* ---------- Misc ---------- */
 img, iframe {
   max-width: 100%;
   height: auto;
-}
-
-
-/* Hero text outline – keeps text readable on any background image */
-.hero-title {
-  color: #0f172a;
-  text-shadow:
-    -1px -1px 0 #fff,
-     1px -1px 0 #fff,
-    -1px  1px 0 #fff,
-     1px  1px 0 #fff,
-     0    0   4px rgba(255,255,255,0.8);
-}
-
-.hero-subtitle {
-  color: #1e293b;
-  text-shadow:
-    -1px -1px 0 #fff,
-     1px -1px 0 #fff,
-    -1px  1px 0 #fff,
-     1px  1px 0 #fff,
-     0    0   3px rgba(255,255,255,0.7);
-}
-
-/* Dark mode – still use white outline + lighter text */
-html.dark .hero-title {
-  color: #f8fafc;
-  text-shadow:
-    -1px -1px 0 #fff,
-     1px -1px 0 #fff,
-    -1px  1px 0 #fff,
-     1px  1px 0 #fff,
-     0    0   6px rgba(0,0,0,0.5);
-}
-
-html.dark .hero-subtitle {
-  color: #e2e8f0;
-  text-shadow:
-    -1px -1px 0 #fff,
-     1px -1px 0 #fff,
-    -1px  1px 0 #fff,
-     1px  1px 0 #fff,
-     0    0   4px rgba(0,0,0,0.4);
 }
