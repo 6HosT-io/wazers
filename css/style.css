@@ -204,3 +204,46 @@ img, iframe {
   max-width: 100%;
   height: auto;
 }
+
+
+/* Hero text outline – keeps text readable on any background image */
+.hero-title {
+  color: #0f172a;
+  text-shadow:
+    -1px -1px 0 #fff,
+     1px -1px 0 #fff,
+    -1px  1px 0 #fff,
+     1px  1px 0 #fff,
+     0    0   4px rgba(255,255,255,0.8);
+}
+
+.hero-subtitle {
+  color: #1e293b;
+  text-shadow:
+    -1px -1px 0 #fff,
+     1px -1px 0 #fff,
+    -1px  1px 0 #fff,
+     1px  1px 0 #fff,
+     0    0   3px rgba(255,255,255,0.7);
+}
+
+/* Dark mode – still use white outline + lighter text */
+html.dark .hero-title {
+  color: #f8fafc;
+  text-shadow:
+    -1px -1px 0 #fff,
+     1px -1px 0 #fff,
+    -1px  1px 0 #fff,
+     1px  1px 0 #fff,
+     0    0   6px rgba(0,0,0,0.5);
+}
+
+html.dark .hero-subtitle {
+  color: #e2e8f0;
+  text-shadow:
+    -1px -1px 0 #fff,
+     1px -1px 0 #fff,
+    -1px  1px 0 #fff,
+     1px  1px 0 #fff,
+     0    0   4px rgba(0,0,0,0.4);
+}
