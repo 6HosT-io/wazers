@@ -118,6 +118,31 @@ wazers-lv/
 - **Waze Blue:** `#0099FF`
 - **Latvian Red:** `#9E3039`
 
+
+---
+
+## How to add your logo
+
+1. Upload your logo PNG file to the `assets/` folder
+2. Name it exactly: **`logo.png`**
+3. It will automatically appear next to “Waze Latvija” in the header on all pages
+4. Recommended size: height around 32–40px (it will be scaled with CSS `h-8`)
+
+If the logo does not appear, check the filename is exactly `logo.png` (lowercase) and that it is inside the `assets` folder.
+
+---
+
+## How to change the homepage banner background
+
+1. Upload your banner image to the `assets/` folder
+2. Name it **`hero.jpg`** (or `hero.png`)
+3. The homepage hero section will use it automatically
+
+You can also edit the background directly in `index.html` – look for the line:
+```html
+style="background-image: url('assets/hero.jpg');"
+```
+
 ---
 
 Made for the Waze Latvija community · 2026
