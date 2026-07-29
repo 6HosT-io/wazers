@@ -1,12 +1,16 @@
 /* ============================================
-   Waze Latvija – Clean stylesheet
+   Waze Latvija – Clean & organized stylesheet
    ============================================ */
 
 :root {
   --waze-blue: #0099FF;
   --latvia-red: #9E3039;
   --text-dark: #0f172a;
+  --text-muted: #64748b;
   --text-light: #f8fafc;
+  --bg-light: #ffffff;
+  --bg-muted: #f8fafc;
+  --border-light: #e2e8f0;
 }
 
 /* ---------- Base ---------- */
@@ -14,16 +18,21 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
+body.page {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   margin: 0;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
   transition: background-color 0.25s ease, color 0.25s ease;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* ---------- Brand colors ---------- */
-.bg-waze   { background-color: var(--waze-blue); }
-.text-waze { color: var(--waze-blue); }
-.bg-latvia { background-color: var(--latvia-red); }
+/* ---------- Brand ---------- */
+.bg-waze     { background-color: var(--waze-blue); }
+.text-waze   { color: var(--waze-blue); }
+.bg-latvia   { background-color: var(--latvia-red); }
 .text-latvia { color: var(--latvia-red); }
 
 /* ---------- Buttons ---------- */
@@ -47,23 +56,88 @@ body {
   transform: translateY(-1px);
 }
 
-/* ---------- Navigation ---------- */
+/* ---------- Site Header ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.site-header-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1.125rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.site-logo img {
+  height: 2.5rem;
+  width: auto;
+}
+
+.site-nav {
+  display: none;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  .site-nav {
+    display: flex;
+  }
+}
+
 .nav-link {
   transition: color 0.2s ease;
+  text-decoration: none;
+  color: #475569;
 }
-.nav-link:hover {
+.nav-link:hover,
+.nav-link.active {
   color: var(--waze-blue);
 }
 
 .lang-btn {
   transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
 }
 .lang-btn.active {
   background-color: var(--waze-blue) !important;
   color: #fff !important;
 }
 
-/* ---------- Main Banner (Hero) ---------- */
+.header-actions {
+  display: none;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .header-actions {
+    display: flex;
+  }
+}
+
+/* ---------- Main Banner (Homepage) ---------- */
 .main-banner {
   position: relative;
   overflow: hidden;
@@ -77,11 +151,6 @@ body {
   background: linear-gradient(135deg, rgba(255,255,255,0.82) 0%, rgba(255,255,255,0.68) 100%);
 }
 
-html.dark .main-banner-overlay {
-  background: linear-gradient(135deg, rgba(15,23,42,0.82) 0%, rgba(15,23,42,0.68) 100%);
-}
-
-/* Banner title – proper outline */
 .main-banner-title {
   color: var(--text-dark);
   -webkit-text-stroke: 1.5px #ffffff;
@@ -89,45 +158,108 @@ html.dark .main-banner-overlay {
   font-weight: 700;
 }
 
-html.dark .main-banner-title {
-  color: var(--text-light);
-  -webkit-text-stroke: 1.5px #ffffff;
-  paint-order: stroke fill;
-}
-
-/* Banner subtitle – lighter outline */
 .main-banner-subtitle {
   color: #1e293b;
   -webkit-text-stroke: 0.8px #ffffff;
   paint-order: stroke fill;
 }
 
-html.dark .main-banner-subtitle {
-  color: #e2e8f0;
-  -webkit-text-stroke: 0.8px #ffffff;
-  paint-order: stroke fill;
+/* ---------- Page Content ---------- */
+.page-content {
+  flex: 1;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+  width: 100%;
+}
+
+.page-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.page-intro {
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+}
+
+/* ---------- Sections ---------- */
+.section-stats {
+  background-color: var(--bg-muted);
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  padding: 2.5rem 0;
+}
+
+.section-map {
+  padding: 4rem 0;
+}
+
+.section-cards {
+  background-color: var(--bg-muted);
+  padding: 4rem 0;
+}
+
+.section-partners {
+  padding: 4rem 0;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.section-subtitle {
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 /* ---------- Cards ---------- */
-.card-hover {
+.card {
+  background-color: #fff;
+  border-radius: 1rem;
+  border: 1px solid var(--border-light);
+  padding: 1.5rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
-.card-hover:hover {
+
+.card:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 24px -8px rgba(0, 153, 255, 0.25);
 }
-html.dark .card-hover:hover {
-  box-shadow: 0 12px 24px -8px rgba(0, 153, 255, 0.15);
+
+.card-icon {
+  font-size: 1.875rem;
+  margin-bottom: 0.75rem;
 }
 
-/* ---------- Waze Live Map ---------- */
+.card-title {
+  font-weight: 700;
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+/* ---------- Waze Map ---------- */
 .waze-map {
   position: relative;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   min-height: 320px;
-  padding-bottom: 56.25%; /* 16:9 */
+  padding-bottom: 56.25%;
 }
 
 .waze-map iframe {
@@ -139,10 +271,6 @@ html.dark .card-hover:hover {
   border: 0;
 }
 
-html.dark .waze-map {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-}
-
 @media (max-width: 480px) {
   .waze-map {
     min-height: 280px;
@@ -152,6 +280,28 @@ html.dark .waze-map {
     position: relative;
     min-height: 280px;
   }
+}
+
+/* ---------- Site Footer ---------- */
+.site-footer {
+  background-color: #0f172a;
+  color: #cbd5e1;
+  margin-top: auto;
+}
+
+.site-footer-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+}
+
+.site-footer a {
+  color: #cbd5e1;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.site-footer a:hover {
+  color: var(--waze-blue);
 }
 
 /* ---------- Forms ---------- */
@@ -190,15 +340,70 @@ html[lang="lv"] span[data-lang="en"],
 html[lang="lv"] a[data-lang="en"],
 html[lang="lv"] button[data-lang="en"] { display: none; }
 
-/* ---------- Dark mode helpers ---------- */
-html.dark body {
+/* ---------- Dark mode ---------- */
+html.dark body.page {
   background-color: #0f172a !important;
   color: #e2e8f0 !important;
 }
 
-html.dark header {
+html.dark .site-header {
   background-color: rgba(15, 23, 42, 0.95) !important;
   border-color: #334155 !important;
+}
+
+html.dark .main-banner-overlay {
+  background: linear-gradient(135deg, rgba(15,23,42,0.82) 0%, rgba(15,23,42,0.68) 100%);
+}
+
+html.dark .main-banner-title {
+  color: var(--text-light);
+  -webkit-text-stroke: 1.5px #ffffff;
+  paint-order: stroke fill;
+}
+
+html.dark .main-banner-subtitle {
+  color: #e2e8f0;
+  -webkit-text-stroke: 0.8px #ffffff;
+  paint-order: stroke fill;
+}
+
+html.dark .section-stats,
+html.dark .section-cards {
+  background-color: #0f172a !important;
+  border-color: #334155 !important;
+}
+
+html.dark .card {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+html.dark .card:hover {
+  box-shadow: 0 12px 24px -8px rgba(0, 153, 255, 0.15);
+}
+
+html.dark .waze-map {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+html.dark .site-footer {
+  background-color: #020617 !important;
+}
+
+html.dark .nav-link {
+  color: #94a3b8;
+}
+html.dark .nav-link:hover,
+html.dark .nav-link.active {
+  color: var(--waze-blue);
+}
+
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background-color: #1e293b !important;
+  border-color: #475569 !important;
+  color: #e2e8f0 !important;
 }
 
 html.dark .bg-white { background-color: #1e293b !important; }
@@ -210,18 +415,8 @@ html.dark .text-slate-500,
 html.dark .text-slate-400 { color: #94a3b8 !important; }
 html.dark .border-slate-100,
 html.dark .border-slate-200 { border-color: #334155 !important; }
-html.dark .bg-slate-900 { background-color: #020617 !important; }
-html.dark .shadow-sm { box-shadow: 0 1px 3px 0 rgba(0,0,0,0.4) !important; }
 html.dark .hover\:bg-slate-50:hover,
 html.dark .hover\:bg-slate-100:hover { background-color: #1e293b !important; }
-
-html.dark input,
-html.dark textarea,
-html.dark select {
-  background-color: #1e293b !important;
-  border-color: #475569 !important;
-  color: #e2e8f0 !important;
-}
 
 /* ---------- Misc ---------- */
 img, iframe {
