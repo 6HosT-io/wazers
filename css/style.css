@@ -1,0 +1,137 @@
+/* Waze Latvija - Custom styles */
+:root {
+  --waze-blue: #0099FF;
+  --latvia-red: #9E3039;
+  --dark: #0f172a;
+  --gray: #64748b;
+  --light: #f8fafc;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--dark);
+}
+
+.bg-waze {
+  background-color: var(--waze-blue);
+}
+
+.text-waze {
+  color: var(--waze-blue);
+}
+
+.bg-latvia {
+  background-color: var(--latvia-red);
+}
+
+.text-latvia {
+  color: var(--latvia-red);
+}
+
+.border-latvia {
+  border-color: var(--latvia-red);
+}
+
+/* Smooth transitions */
+.nav-link {
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--waze-blue);
+}
+
+/* Language switcher */
+.lang-btn {
+  transition: all 0.2s ease;
+}
+
+.lang-btn.active {
+  background-color: var(--waze-blue);
+  color: white;
+}
+
+/* Hero gradient overlay */
+.hero-overlay {
+  background: linear-gradient(135deg, rgba(0, 153, 255, 0.15) 0%, rgba(158, 48, 57, 0.1) 100%);
+}
+
+/* Card hover */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -8px rgba(0, 153, 255, 0.25);
+}
+
+/* Mobile menu */
+.mobile-menu {
+  transition: max-height 0.3s ease;
+  overflow: hidden;
+}
+
+/* Footer */
+footer a:hover {
+  color: var(--waze-blue);
+}
+
+/* Form focus */
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--waze-blue);
+  box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.2);
+}
+
+/* Button styles */
+.btn-primary {
+  background-color: var(--waze-blue);
+  color: white;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-primary:hover {
+  background-color: #007acc;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: var(--latvia-red);
+  color: white;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #7a242b;
+  transform: translateY(-1px);
+}
+
+/* Waze map iframe */
+.waze-map {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Hide elements based on language */
+[data-lang="en"] { display: none; }
+html[lang="en"] [data-lang="lv"] { display: none; }
+html[lang="en"] [data-lang="en"] { display: block; }
+html[lang="lv"] [data-lang="lv"] { display: block; }
+html[lang="lv"] [data-lang="en"] { display: none; }
+
+/* For inline elements */
+span[data-lang="en"], a[data-lang="en"], button[data-lang="en"] { display: none; }
+html[lang="en"] span[data-lang="lv"], 
+html[lang="en"] a[data-lang="lv"], 
+html[lang="en"] button[data-lang="lv"] { display: none; }
+html[lang="en"] span[data-lang="en"], 
+html[lang="en"] a[data-lang="en"], 
+html[lang="en"] button[data-lang="en"] { display: inline; }
+html[lang="lv"] span[data-lang="lv"], 
+html[lang="lv"] a[data-lang="lv"], 
+html[lang="lv"] button[data-lang="lv"] { display: inline; }
+html[lang="lv"] span[data-lang="en"], 
+html[lang="lv"] a[data-lang="en"], 
+html[lang="lv"] button[data-lang="en"] { display: none; }
