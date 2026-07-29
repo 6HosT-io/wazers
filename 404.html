@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 – Kaut kas nogāja greizi | Waze Latvija</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      darkMode: 'class',
+      theme: { extend: { colors: { waze: '#0099FF', latvia: '#9E3039' } } }
+    }
+  </script>
+</head>
+<body class="bg-white text-slate-900 min-h-screen flex flex-col">
+
+  <!-- Header (same structure as main pages) -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-16">
+        <a href="index.html" class="flex items-center gap-2 font-bold text-lg">
+          <span class="text-2xl">🚗</span>
+          <span class="text-waze">Waze</span>
+          <span class="text-latvia">Latvija</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+          <a href="index.html" class="nav-link text-slate-600 hover:text-waze">Galvena</a>
+          <a href="jaunumi.html" class="nav-link text-slate-600 hover:text-waze">Jaunumi</a>
+          <a href="notikumi.html" class="nav-link text-slate-600 hover:text-waze">Notikumi</a>
+          <a href="svariga.html" class="nav-link text-slate-600 hover:text-waze">Svarīga Informācija</a>
+          <a href="palidziba.html" class="nav-link text-slate-600 hover:text-waze">Palīdzība</a>
+          <a href="kontakts.html" class="nav-link text-slate-600 hover:text-waze">Kontakts</a>
+        </nav>
+        <div class="hidden md:flex items-center gap-3">
+          <button id="dark-mode-toggle" class="p-2 rounded-lg hover:bg-slate-100 text-xl" aria-label="Toggle dark mode">🌙</button>
+          <div class="flex rounded-lg overflow-hidden border border-slate-200 text-xs font-medium">
+            <button data-set-lang="lv" class="lang-btn px-3 py-1.5 active bg-waze text-white">LV</button>
+            <button data-set-lang="en" class="lang-btn px-3 py-1.5 bg-gray-100 text-gray-700">EN</button>
+          </div>
+        </div>
+        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-slate-100">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+      <div id="mobile-menu" class="hidden md:hidden pb-4">
+        <nav class="flex flex-col gap-2 text-sm font-medium">
+          <a href="index.html" class="px-3 py-2 rounded-lg hover:bg-slate-50">Galvena</a>
+          <a href="jaunumi.html" class="px-3 py-2 rounded-lg hover:bg-slate-50">Jaunumi</a>
+          <a href="notikumi.html" class="px-3 py-2 rounded-lg hover:bg-slate-50">Notikumi</a>
+          <a href="svariga.html" class="px-3 py-2 rounded-lg hover:bg-slate-50">Svarīga Informācija</a>
+          <a href="palidziba.html" class="px-3 py-2 rounded-lg hover:bg-slate-50">Palīdzība</a>
+          <a href="kontakts.html" class="px-3 py-2 rounded-lg hover:bg-slate-50">Kontakts</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main error block -->
+  <main class="flex-1 flex items-center justify-center px-4 py-20">
+    <div class="text-center max-w-md">
+      <div class="text-7xl mb-6">😕</div>
+      <h1 class="text-3xl md:text-4xl font-bold mb-3">
+        <span data-lang="lv">Kaut kas nogāja greizi</span>
+        <span data-lang="en">Something went wrong</span>
+      </h1>
+      <p class="text-slate-600 mb-8">
+        <span data-lang="lv">Lapa, kuru meklējat, neeksistē vai ir pārvietota.</span>
+        <span data-lang="en">The page you are looking for does not exist or has been moved.</span>
+      </p>
+      <a href="index.html" class="btn-primary inline-block px-8 py-3 rounded-xl font-medium">
+        <span data-lang="lv">Atgriezties uz sākumlapu</span>
+        <span data-lang="en">Back to homepage</span>
+      </a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-300">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-center text-sm">
+      <div class="flex items-center justify-center gap-2 font-bold text-white mb-2">
+        <span>🚗</span> Waze Latvija
+      </div>
+      <p class="text-slate-400">
+        <span data-lang="lv">Kopā ātrāk un drošāk!</span>
+        <span data-lang="en">Together faster and safer!</span>
+      </p>
+      <div class="mt-4 text-xs text-slate-500">
+        © 2026 Waze Latvija Community · <a href="https://www.wazers.lv" class="hover:text-waze">wazers.lv</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

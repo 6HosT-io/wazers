@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           colors: {
@@ -47,6 +48,7 @@
 
         <!-- Language + CTA -->
         <div class="hidden md:flex items-center gap-3">
+          <button id="dark-mode-toggle" class="p-2 rounded-lg hover:bg-slate-100 text-xl" aria-label="Toggle dark mode">🌙</button>
           <div class="flex rounded-lg overflow-hidden border border-slate-200 text-xs font-medium">
             <button data-set-lang="lv" class="lang-btn px-3 py-1.5 active bg-waze text-white">LV</button>
             <button data-set-lang="en" class="lang-btn px-3 py-1.5 bg-gray-100 text-gray-700">EN</button>
@@ -290,6 +292,7 @@
     </div>
   </footer>
 
+  <script src="js/config.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

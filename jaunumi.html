@@ -8,7 +8,8 @@
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>
-    tailwind.config = { theme: { extend: { colors: { waze: '#0099FF', latvia: '#9E3039' } } } }
+    tailwind.config = {
+      darkMode: 'class', theme: { extend: { colors: { waze: '#0099FF', latvia: '#9E3039' } } } }
   </script>
 </head>
 <body class="bg-white text-slate-900">
@@ -31,6 +32,7 @@
           <a href="kontakts.html" class="nav-link text-slate-600 hover:text-waze">Kontakts</a>
         </nav>
         <div class="hidden md:flex items-center gap-3">
+          <button id="dark-mode-toggle" class="p-2 rounded-lg hover:bg-slate-100 text-xl" aria-label="Toggle dark mode">🌙</button>
           <div class="flex rounded-lg overflow-hidden border border-slate-200 text-xs font-medium">
             <button data-set-lang="lv" class="lang-btn px-3 py-1.5 active bg-waze text-white">LV</button>
             <button data-set-lang="en" class="lang-btn px-3 py-1.5 bg-gray-100 text-gray-700">EN</button>
@@ -67,18 +69,25 @@
       <span data-lang="en">Map updates, community news and tips from Waze Latvia.</span>
     </p>
 
-    <!-- Facebook embed placeholder -->
-    <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 text-center">
-      <p class="text-slate-600 mb-4">
-        <span data-lang="lv">Šeit parādīsies Facebook feed no @WazeLV</span>
-        <span data-lang="en">Facebook feed from @WazeLV will appear here</span>
-      </p>
-      <a href="https://www.facebook.com/WazeLV" target="_blank" class="btn-primary inline-block px-6 py-3 rounded-xl font-medium">
-        <span data-lang="lv">Skatīt Facebook</span>
-        <span data-lang="en">View on Facebook</span>
-      </a>
-      <p class="text-xs text-slate-400 mt-4">
-        (Lai iegūtu automātisku feed, pievienojiet Facebook Page Plugin vai RSS embed)
+    <!-- Facebook Page Plugin -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/lv_LV/sdk.js#xfbml=1&version=v19.0" nonce=""></script>
+    
+    <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 overflow-hidden">
+      <div class="fb-page"
+           data-href="https://www.facebook.com/WazeLV"
+           data-tabs="timeline"
+           data-width=""
+           data-height="600"
+           data-small-header="false"
+           data-adapt-container-width="true"
+           data-hide-cover="false"
+           data-show-facepile="true">
+      </div>
+      <p class="text-center text-sm text-slate-500 mt-4">
+        <a href="https://www.facebook.com/WazeLV" target="_blank" rel="noopener" class="text-waze hover:underline">
+          @WazeLV uz Facebook →
+        </a>
       </p>
     </div>
 
@@ -129,6 +138,7 @@
     </div>
   </footer>
 
+  <script src="js/config.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

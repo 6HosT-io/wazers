@@ -8,7 +8,8 @@
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>
-    tailwind.config = { theme: { extend: { colors: { waze: '#0099FF', latvia: '#9E3039' } } } }
+    tailwind.config = {
+      darkMode: 'class', theme: { extend: { colors: { waze: '#0099FF', latvia: '#9E3039' } } } }
   </script>
 </head>
 <body class="bg-white text-slate-900">
@@ -30,6 +31,7 @@
           <a href="kontakts.html" class="nav-link text-waze">Kontakts</a>
         </nav>
         <div class="hidden md:flex items-center gap-3">
+          <button id="dark-mode-toggle" class="p-2 rounded-lg hover:bg-slate-100 text-xl" aria-label="Toggle dark mode">🌙</button>
           <div class="flex rounded-lg overflow-hidden border border-slate-200 text-xs font-medium">
             <button data-set-lang="lv" class="lang-btn px-3 py-1.5 active bg-waze text-white">LV</button>
             <button data-set-lang="en" class="lang-btn px-3 py-1.5 bg-gray-100 text-gray-700">EN</button>
@@ -69,7 +71,7 @@
     <div class="grid md:grid-cols-2 gap-10">
       <!-- Contact form -->
       <div>
-        <form action="mailto:wazelatvia@gmail.com" method="post" enctype="text/plain" class="space-y-4">
+        <form id="contact-form" action="mailto:wazelatvia@gmail.com" method="post" enctype="text/plain" class="space-y-4">
           <div>
             <label class="block text-sm font-medium mb-1">
               <span data-lang="lv">Vārds</span>
@@ -110,8 +112,8 @@
           </button>
         </form>
         <p class="text-xs text-slate-400 mt-3">
-          <span data-lang="lv">Forma atver e-pasta klientu. Vēlāk var pievienot Formspree vai citu servisu.</span>
-          <span data-lang="en">Form opens email client. Later you can add Formspree or similar.</span>
+          <span data-lang="lv">Pašlaik forma atver e-pasta klientu. Lai saņemtu ziņas tieši uz e-pastu bez klienta, izveidojiet bezmaksas kontu formspree.io un ierakstiet endpoint failā js/config.js</span>
+          <span data-lang="en">Currently the form opens the email client. To receive messages directly, create a free form at formspree.io and put the endpoint in js/config.js</span>
         </p>
       </div>
 
@@ -186,6 +188,7 @@
     </div>
   </footer>
 
+  <script src="js/config.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
