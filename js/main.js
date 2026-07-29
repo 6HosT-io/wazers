@@ -2,8 +2,10 @@
 
 document.addEventListener('DOMContentLoaded', function () {
   // ---------- Maintenance Mode ----------
+  // More reliable check that works with different hosting paths
   if (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.MAINTENANCE_MODE === true) {
-    if (!window.location.pathname.endsWith('maintenance.html')) {
+    const isMaintenancePage = window.location.href.indexOf('maintenance.html') !== -1;
+    if (!isMaintenancePage) {
       window.location.replace('maintenance.html');
       return;
     }
@@ -33,48 +35,50 @@ document.addEventListener('DOMContentLoaded', function () {
       b.classList.toggle('text-white', isActive);
       b.classList.toggle('bg-gray-100', !isActive);
       b.classList.toggle('text-gray-700', !isActive);
-      b.classList.toggle('dark:bg-slate-700', !isActive);
-      b.classList.toggle('dark:text-slate-200', !isActive);
     });
   }
 
   // ---------- Dark Mode ----------
-  const darkToggle = document.getElementById('dark-mode-toggle');
+  const darkToggles = document.querySelectorAll('#dark-mode-toggle, .dark-mode-toggle');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
   function applyTheme(theme) {
     if (theme === 'dark') {
       html.classList.add('dark');
+      document.body.classList.add('dark');
     } else {
       html.classList.remove('dark');
+      document.body.classList.remove('dark');
     }
     localStorage.setItem('wazers-theme', theme);
-    updateToggleIcon(theme);
+    updateToggleIcons(theme);
   }
 
-  function updateToggleIcon(theme) {
-    if (!darkToggle) return;
-    darkToggle.innerHTML = theme === 'dark' ? '☀️' : '🌙';
-    darkToggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  function updateToggleIcons(theme) {
+    darkToggles.forEach(btn => {
+      btn.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+      btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    });
   }
 
   // Initial theme: saved preference or system
   const savedTheme = localStorage.getItem('wazers-theme');
-  if (savedTheme) {
+  if (savedTheme === 'dark' || savedTheme === 'light') {
     applyTheme(savedTheme);
   } else {
     applyTheme(prefersDark.matches ? 'dark' : 'light');
   }
 
-  // Manual toggle
-  if (darkToggle) {
-    darkToggle.addEventListener('click', () => {
+  // Manual toggle (works with multiple buttons)
+  darkToggles.forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
       const isDark = html.classList.contains('dark');
       applyTheme(isDark ? 'light' : 'dark');
     });
-  }
+  });
 
-  // Follow system changes only if no manual preference
+  // Follow system changes only if user has never set a preference
   prefersDark.addEventListener('change', (e) => {
     if (!localStorage.getItem('wazers-theme')) {
       applyTheme(e.matches ? 'dark' : 'light');
