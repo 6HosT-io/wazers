@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palīdzība – Waze Latvija</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { theme: { extend: { colors: { waze: '#0099FF', latvia: '#9E3039' } } } }
+  </script>
+</head>
+<body class="bg-white text-slate-900">
+
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-16">
+        <a href="index.html" class="flex items-center gap-2 font-bold text-lg">
+          <span class="text-2xl">🚗</span>
+          <span class="text-waze">Waze</span>
+          <span class="text-latvia">Latvija</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+          <a href="index.html" class="nav-link text-slate-600 hover:text-waze">Galvena</a>
+          <a href="jaunumi.html" class="nav-link text-slate-600 hover:text-waze">Jaunumi</a>
+          <a href="notikumi.html" class="nav-link text-slate-600 hover:text-waze">Notikumi</a>
+          <a href="svariga.html" class="nav-link text-slate-600 hover:text-waze">Svarīga Informācija</a>
+          <a href="palidziba.html" class="nav-link text-waze">Palīdzība</a>
+          <a href="kontakts.html" class="nav-link text-slate-600 hover:text-waze">Kontakts</a>
+        </nav>
+        <div class="hidden md:flex items-center gap-3">
+          <div class="flex rounded-lg overflow-hidden border border-slate-200 text-xs font-medium">
+            <button data-set-lang="lv" class="lang-btn px-3 py-1.5 active bg-waze text-white">LV</button>
+            <button data-set-lang="en" class="lang-btn px-3 py-1.5 bg-gray-100 text-gray-700">EN</button>
+          </div>
+        </div>
+        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-slate-100">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+      <div id="mobile-menu" class="hidden md:hidden pb-4">
+        <nav class="flex flex-col gap-2 text-sm font-medium">
+          <a href="index.html" class="px-3 py-2 rounded-lg hover:bg-slate-50">Galvena</a>
+          <a href="jaunumi.html" class="px-3 py-2 rounded-lg hover:bg-slate-50">Jaunumi</a>
+          <a href="notikumi.html" class="px-3 py-2 rounded-lg hover:bg-slate-50">Notikumi</a>
+          <a href="svariga.html" class="px-3 py-2 rounded-lg hover:bg-slate-50">Svarīga Informācija</a>
+          <a href="palidziba.html" class="px-3 py-2 rounded-lg bg-waze/10 text-waze">Palīdzība</a>
+          <a href="kontakts.html" class="px-3 py-2 rounded-lg hover:bg-slate-50">Kontakts</a>
+          <div class="flex gap-2 mt-2 px-3">
+            <button data-set-lang="lv" class="lang-btn flex-1 py-2 rounded-lg active bg-waze text-white text-sm">LV</button>
+            <button data-set-lang="en" class="lang-btn flex-1 py-2 rounded-lg bg-gray-100 text-gray-700 text-sm">EN</button>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+    <h1 class="text-3xl font-bold mb-2">
+      <span data-lang="lv">Palīdzība</span>
+      <span data-lang="en">Help</span>
+    </h1>
+    <p class="text-slate-600 mb-10">
+      <span data-lang="lv">Bieži uzdotie jautājumi un noderīgas saites.</span>
+      <span data-lang="en">Frequently asked questions and useful links.</span>
+    </p>
+
+    <div class="space-y-4">
+      <details class="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm group">
+        <summary class="font-bold text-lg cursor-pointer list-none flex justify-between items-center">
+          <span data-lang="lv">Kā ziņot par notikumu Waze aplikācijā?</span>
+          <span data-lang="en">How to report an incident in the Waze app?</span>
+          <span class="text-waze text-xl">+</span>
+        </summary>
+        <p class="mt-4 text-slate-600 text-sm">
+          <span data-lang="lv">Atveriet Waze, pieskarieties brīdinājuma ikonai un izvēlieties attiecīgo tipu (avārija, policija, ceļu darbi utt.).</span>
+          <span data-lang="en">Open Waze, tap the alert icon and choose the relevant type (accident, police, roadworks, etc.).</span>
+        </p>
+      </details>
+
+      <details class="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
+        <summary class="font-bold text-lg cursor-pointer list-none flex justify-between items-center">
+          <span data-lang="lv">Kā kļūt par kartes redaktoru?</span>
+          <span data-lang="en">How to become a Map Editor?</span>
+          <span class="text-waze text-xl">+</span>
+        </summary>
+        <p class="mt-4 text-slate-600 text-sm">
+          <span data-lang="lv">Dodieties uz waze.com/editor, piesakieties ar savu Waze kontu un sāciet ar 1. līmeni. Ieteicams pievienoties Discord un meklēt mentoru.</span>
+          <span data-lang="en">Go to waze.com/editor, log in with your Waze account and start at level 1. We recommend joining Discord and finding a mentor.</span>
+        </p>
+      </details>
+
+      <details class="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
+        <summary class="font-bold text-lg cursor-pointer list-none flex justify-between items-center">
+          <span data-lang="lv">Kur atrast Latvijas Waze forumu?</span>
+          <span data-lang="en">Where to find the Latvia Waze forum?</span>
+          <span class="text-waze text-xl">+</span>
+        </summary>
+        <p class="mt-4 text-slate-600 text-sm">
+          <span data-lang="lv">Oficiālais forums: discuss.waze.com → Map Editors → Latvia.</span>
+          <span data-lang="en">Official forum: discuss.waze.com → Map Editors → Latvia.</span>
+        </p>
+      </details>
+    </div>
+
+    <div class="mt-10 p-6 bg-waze/5 rounded-2xl border border-waze/20">
+      <h2 class="font-bold mb-2">
+        <span data-lang="lv">Noderīgas saites</span>
+        <span data-lang="en">Useful links</span>
+      </h2>
+      <ul class="space-y-2 text-sm">
+        <li><a href="https://www.waze.com/editor" target="_blank" class="text-waze hover:underline">Waze Map Editor (WME)</a></li>
+        <li><a href="https://www.waze.com" target="_blank" class="text-waze hover:underline">Waze oficiālā lapa</a></li>
+        <li><a href="https://www.facebook.com/WazeLV" target="_blank" class="text-waze hover:underline">Facebook @WazeLV</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer class="bg-slate-900 text-slate-300 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+      <div class="grid md:grid-cols-3 gap-8">
+        <div>
+          <div class="flex items-center gap-2 font-bold text-white text-lg mb-3"><span>🚗</span> Waze Latvija</div>
+          <p class="text-sm"><span data-lang="lv">Kopā ātrāk un drošāk!</span><span data-lang="en">Together faster and safer!</span></p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-3 text-sm"><span data-lang="lv">Saites</span><span data-lang="en">Links</span></h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="index.html" class="hover:text-waze">Galvena</a></li>
+            <li><a href="jaunumi.html" class="hover:text-waze">Jaunumi</a></li>
+            <li><a href="notikumi.html" class="hover:text-waze">Notikumi</a></li>
+            <li><a href="kontakts.html" class="hover:text-waze">Kontakts</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-3 text-sm"><span data-lang="lv">Kontakti</span><span data-lang="en">Contact</span></h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="https://www.facebook.com/WazeLV" target="_blank" class="hover:text-waze">Facebook @WazeLV</a></li>
+            <li><a href="mailto:wazelatvia@gmail.com" class="hover:text-waze">wazelatvia@gmail.com</a></li>
+            <li class="pt-2"><a href="https://www.waze.com/editor" target="_blank" class="inline-block btn-secondary px-4 py-2 rounded-lg text-sm font-medium">Atvērt WME</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-slate-800 mt-10 pt-6 text-center text-xs text-slate-500">
+        © 2026 Waze Latvija Community · <a href="https://www.wazers.lv" class="hover:text-waze">wazers.lv</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
