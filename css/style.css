@@ -165,7 +165,7 @@ a { color: inherit; }
 .logo img {
   border-radius: 50%;
   object-fit: cover;
-  height: 2.5rem × 2.5rem;
+  height: 2.5rem;
   width: auto;
 }
 
