@@ -17,6 +17,38 @@ Fast, clean static website for the Waze Latvia community.
 
 ---
 
+
+## Clean URLs (no /index.html in the address bar)
+
+The site includes a `.htaccess` file so addresses look like:
+
+| Old | New |
+|-----|-----|
+| `https://wazers.lv/index.html` | `https://wazers.lv/` |
+| `https://wazers.lv/jaunumi.html` | `https://wazers.lv/jaunumi` |
+| `https://wazers.lv/notikumi.html` | `https://wazers.lv/notikumi` |
+| `https://wazers.lv/kontakts.html` | `https://wazers.lv/kontakts` |
+| … | … |
+
+**What you need to do:**
+1. Upload the `.htaccess` file to the **same folder** as `index.html` (website root).
+2. Make sure Apache `mod_rewrite` is enabled (on Garmtech/Plesk it usually is by default).
+3. Clear browser cache and open `https://wazers.lv/` — it should no longer show `/index.html`.
+
+If your hosting uses **Nginx** instead of Apache, `.htaccess` is ignored. In that case, in Plesk go to:
+**Domains → wazers.lv → Apache & nginx Settings → Additional nginx directives**
+and paste:
+
+```nginx
+location / {
+  try_files $uri $uri.html $uri/ /index.html;
+}
+error_page 404 /404.html;
+```
+
+Internal links in the site already point to clean URLs (`/`, `/jaunumi`, `/kontakts`, etc.).
+
+
 ## How to enable / disable Maintenance Mode
 
 1. Open the file `js/config.js`
