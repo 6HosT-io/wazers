@@ -1,67 +1,49 @@
-// Waze Latvija – Main JavaScript
+// Waze Latvija – Main JS
 
 document.addEventListener('DOMContentLoaded', function () {
-  // ---------- Maintenance Mode ----------
-  // More reliable check that works with different hosting paths
+  // Maintenance mode
   if (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.MAINTENANCE_MODE === true) {
-    const isMaintenancePage = window.location.href.indexOf('maintenance.html') !== -1;
-    if (!isMaintenancePage) {
+    if (window.location.href.indexOf('maintenance.html') === -1) {
       window.location.replace('maintenance.html');
       return;
     }
   }
 
-  // ---------- Language Switcher ----------
-  const langButtons = document.querySelectorAll('[data-set-lang]');
   const html = document.documentElement;
 
+  // Language
+  const langButtons = document.querySelectorAll('[data-set-lang]');
   const savedLang = localStorage.getItem('wazers-lang') || 'lv';
   setLanguage(savedLang);
 
   langButtons.forEach(btn => {
     btn.addEventListener('click', function () {
-      const lang = this.getAttribute('data-set-lang');
-      setLanguage(lang);
-      localStorage.setItem('wazers-lang', lang);
+      setLanguage(this.getAttribute('data-set-lang'));
+      localStorage.setItem('wazers-lang', this.getAttribute('data-set-lang'));
     });
   });
 
   function setLanguage(lang) {
     html.setAttribute('lang', lang);
     langButtons.forEach(b => {
-      const isActive = b.getAttribute('data-set-lang') === lang;
-      b.classList.toggle('active', isActive);
-      b.classList.toggle('bg-waze', isActive);
-      b.classList.toggle('text-white', isActive);
-      b.classList.toggle('bg-gray-100', !isActive);
-      b.classList.toggle('text-gray-700', !isActive);
+      const on = b.getAttribute('data-set-lang') === lang;
+      b.classList.toggle('active', on);
     });
   }
 
-  // ---------- Dark Mode ----------
+  // Dark mode
   const darkToggles = document.querySelectorAll('#dark-mode-toggle, .dark-mode-toggle');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
   function applyTheme(theme) {
-    if (theme === 'dark') {
-      html.classList.add('dark');
-      document.body.classList.add('dark');
-    } else {
-      html.classList.remove('dark');
-      document.body.classList.remove('dark');
-    }
+    html.classList.toggle('dark', theme === 'dark');
     localStorage.setItem('wazers-theme', theme);
-    updateToggleIcons(theme);
-  }
-
-  function updateToggleIcons(theme) {
     darkToggles.forEach(btn => {
-      btn.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+      btn.textContent = theme === 'dark' ? '☀️' : '🌙';
       btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
     });
   }
 
-  // Initial theme: saved preference or system
   const savedTheme = localStorage.getItem('wazers-theme');
   if (savedTheme === 'dark' || savedTheme === 'light') {
     applyTheme(savedTheme);
@@ -69,26 +51,22 @@ document.addEventListener('DOMContentLoaded', function () {
     applyTheme(prefersDark.matches ? 'dark' : 'light');
   }
 
-  // Manual toggle (works with multiple buttons)
   darkToggles.forEach(btn => {
     btn.addEventListener('click', function (e) {
       e.preventDefault();
-      const isDark = html.classList.contains('dark');
-      applyTheme(isDark ? 'light' : 'dark');
+      applyTheme(html.classList.contains('dark') ? 'light' : 'dark');
     });
   });
 
-  // Follow system changes only if user has never set a preference
-  prefersDark.addEventListener('change', (e) => {
+  prefersDark.addEventListener('change', e => {
     if (!localStorage.getItem('wazers-theme')) {
       applyTheme(e.matches ? 'dark' : 'light');
     }
   });
 
-  // ---------- Mobile Menu ----------
+  // Mobile menu
   const menuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
-
   if (menuBtn && mobileMenu) {
     menuBtn.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
@@ -98,10 +76,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ---------- Formspree support ----------
-  const contactForm = document.getElementById('contact-form');
-  if (contactForm && typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.FORMSPREE_ENDPOINT) {
-    contactForm.setAttribute('action', SITE_CONFIG.FORMSPREE_ENDPOINT);
-    contactForm.setAttribute('method', 'POST');
+  // Formspree
+  const form = document.getElementById('contact-form');
+  if (form && typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.FORMSPREE_ENDPOINT) {
+    form.setAttribute('action', SITE_CONFIG.FORMSPREE_ENDPOINT);
+    form.setAttribute('method', 'POST');
   }
 });
