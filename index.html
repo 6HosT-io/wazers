@@ -23,85 +23,83 @@
     }
   </script>
 </head>
+
 <body class="page page-home">
 
   <!-- Header -->
   <header class="site-header">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="flex items-center justify-between h-16">
-        <!-- Logo -->
-        <a href="index.html" class="flex items-center gap-2 font-bold text-lg">
-          <img src="assets/logo.png" alt="Waze Latvija" class="h-10 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
-          <span class="text-2xl" style="display:none">🚗</span>
-          <span class="text-waze">Waze</span>
-          <span class="text-latvia">Latvija</span>
-        </a>
+    <div class="wrap row-between">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="Waze Latvija" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
+        <span style="display:none">🚗</span>
+        <span class="text-blue">Waze</span>
+        <span class="text-red">Latvija</span>
+      </a>
 
-        <!-- Desktop Nav -->
-                <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
-          <a href="index.html" class="nav-link text-waze"><span data-lang="lv">Galvena</span><span data-lang="en">Home</span></a>
-          <a href="jaunumi.html" class="nav-link text-slate-600 hover:text-waze"><span data-lang="lv">Jaunumi</span><span data-lang="en">News</span></a>
-          <a href="notikumi.html" class="nav-link text-slate-600 hover:text-waze"><span data-lang="lv">Notikumi</span><span data-lang="en">Events</span></a>
-          <a href="svariga.html" class="nav-link text-slate-600 hover:text-waze"><span data-lang="lv">Svarīga Informācija</span><span data-lang="en">Important Info</span></a>
-          <a href="palidziba.html" class="nav-link text-slate-600 hover:text-waze"><span data-lang="lv">Palīdzība</span><span data-lang="en">Help</span></a>
-          <a href="kontakts.html" class="nav-link text-slate-600 hover:text-waze"><span data-lang="lv">Kontakts</span><span data-lang="en">Contact</span></a>
-        </nav>
+      <nav class="nav">
+        <a href="index.html" class="active"><span data-lang="lv">Galvena</span><span data-lang="en">Home</span></a>
+        <a href="jaunumi.html"><span data-lang="lv">Jaunumi</span><span data-lang="en">News</span></a>
+        <a href="notikumi.html"><span data-lang="lv">Notikumi</span><span data-lang="en">Events</span></a>
+        <a href="svariga.html"><span data-lang="lv">Svarīga Informācija</span><span data-lang="en">Important Info</span></a>
+        <a href="palidziba.html"><span data-lang="lv">Palīdzība</span><span data-lang="en">Help</span></a>
+        <a href="kontakts.html"><span data-lang="lv">Kontakts</span><span data-lang="en">Contact</span></a>
+      </nav>
 
-        <!-- Language + CTA -->
-        <div class="hidden md:flex items-center gap-3">
-          <button id="dark-mode-toggle" class="p-2 rounded-lg hover:bg-slate-100 text-xl" aria-label="Toggle dark mode">🌙</button>
-          <div class="flex rounded-lg overflow-hidden border border-slate-200 text-xs font-medium">
-            <button data-set-lang="lv" class="lang-btn px-3 py-1.5 active bg-waze text-white">LV</button>
-            <button data-set-lang="en" class="lang-btn px-3 py-1.5 bg-gray-100 text-gray-700">EN</button>
-          </div>
-          <a href="https://www.waze.com" target="_blank" class="btn-primary px-4 py-2 rounded-lg text-sm font-medium">
-            <span data-lang="lv">Lejupielādēt</span>
-            <span data-lang="en">Download</span>
-          </a>
+      <div class="header-actions">
+        <button id="dark-mode-toggle" class="btn-icon" aria-label="Toggle dark mode">🌙</button>
+        <div class="lang-switch">
+          <button data-set-lang="lv" class="lang-btn active">LV</button>
+          <button data-set-lang="en" class="lang-btn">EN</button>
         </div>
-
-        <!-- Mobile menu button -->
-        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-slate-100">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
+        <a href="https://www.waze.com" target="_blank" class="btn btn-blue btn-sm">
+          <span data-lang="lv">Lejupielādēt</span>
+          <span data-lang="en">Download</span>
+        </a>
       </div>
 
-      <!-- Mobile Menu -->
-      <div id="mobile-menu" class="hidden md:hidden pb-4">
-        <nav class="flex flex-col gap-2 text-sm font-medium">
-          <a href="index.html" class="px-3 py-2 rounded-lg bg-waze/10 text-waze"><span data-lang="lv">Galvena</span><span data-lang="en">Home</span></a>
-          <a href="jaunumi.html" class="px-3 py-2 rounded-lg hover:bg-slate-50"><span data-lang="lv">Jaunumi</span><span data-lang="en">News</span></a>
-          <a href="notikumi.html" class="px-3 py-2 rounded-lg hover:bg-slate-50"><span data-lang="lv">Notikumi</span><span data-lang="en">Events</span></a>
-          <a href="svariga.html" class="px-3 py-2 rounded-lg hover:bg-slate-50"><span data-lang="lv">Svarīga Informācija</span><span data-lang="en">Important Info</span></a>
-          <a href="palidziba.html" class="px-3 py-2 rounded-lg hover:bg-slate-50"><span data-lang="lv">Palīdzība</span><span data-lang="en">Help</span></a>
-          <a href="kontakts.html" class="px-3 py-2 rounded-lg hover:bg-slate-50"><span data-lang="lv">Kontakts</span><span data-lang="en">Contact</span></a>
-</nav>
+      <button id="mobile-menu-btn" class="menu-btn" aria-label="Menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="mobile-menu hidden">
+      <div class="wrap">
+        <nav>
+          <a href="index.html" class="active"><span data-lang="lv">Galvena</span><span data-lang="en">Home</span></a>
+          <a href="jaunumi.html"><span data-lang="lv">Jaunumi</span><span data-lang="en">News</span></a>
+          <a href="notikumi.html"><span data-lang="lv">Notikumi</span><span data-lang="en">Events</span></a>
+          <a href="svariga.html"><span data-lang="lv">Svarīga Informācija</span><span data-lang="en">Important Info</span></a>
+          <a href="palidziba.html"><span data-lang="lv">Palīdzība</span><span data-lang="en">Help</span></a>
+          <a href="kontakts.html"><span data-lang="lv">Kontakts</span><span data-lang="en">Contact</span></a>
+          <div class="row mt-2">
+            <button class="dark-mode-toggle btn-icon" aria-label="Toggle dark mode">🌙</button>
+            <button data-set-lang="lv" class="lang-btn active">LV</button>
+            <button data-set-lang="en" class="lang-btn">EN</button>
+          </div>
+        </nav>
       </div>
     </div>
   </header>
 
-  <!-- Main Banner -->
-  <!-- Background image: put your file in assets/hero.jpg (or change the url below) -->
+  <!-- Banner -->
   <section class="main-banner" style="background-image: url('assets/hero.jpg');">
     <div class="main-banner-overlay"></div>
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-24 relative">
-      <div class="max-w-2xl">
-        <h1 class="main-banner-title text-4xl md:text-5xl leading-tight mb-4">
+    <div class="wrap">
+      <div style="max-width: 36rem;">
+        <h1 class="main-banner-title">
           <span data-lang="lv">Waze Latvija – Kopā ātrāk un drošāk!</span>
           <span data-lang="en">Waze Latvia – Together faster and safer!</span>
         </h1>
-        <p class="main-banner-subtitle text-lg mb-8">
+        <p class="main-banner-subtitle">
           <span data-lang="lv">Reāllaika satiksme, precīzas kartes un aktīva kopiena Latvijā. Pievienojies mums un palīdzi uzlabot ceļus.</span>
           <span data-lang="en">Real-time traffic, accurate maps and an active community in Latvia. Join us and help improve the roads.</span>
         </p>
-        <div class="flex flex-wrap gap-3">
-          <a href="https://www.waze.com" target="_blank" class="btn-primary px-6 py-3 rounded-xl font-medium">
+        <div class="banner-actions">
+          <a href="https://www.waze.com" target="_blank" class="btn btn-blue">
             <span data-lang="lv">Lejupielādēt Waze</span>
             <span data-lang="en">Download Waze</span>
           </a>
-          <a href="kontakts.html" class="btn-secondary px-6 py-3 rounded-xl font-medium">
+          <a href="kontakts.html" class="btn btn-red">
             <span data-lang="lv">Kļūt par redaktoru</span>
             <span data-lang="en">Become an Editor</span>
           </a>
@@ -110,185 +108,107 @@
     </div>
   </section>
 
-  <!-- Stats / Counter -->
+  <!-- Stats -->
   <section class="section-stats">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-        <div>
-          <div class="text-3xl font-bold text-waze">1 200+</div>
-          <div class="text-sm text-slate-500 mt-1">
-            <span data-lang="lv">Aktīvie Wazeri</span>
-            <span data-lang="en">Active Wazers</span>
-          </div>
-        </div>
-        <div>
-          <div class="text-3xl font-bold text-waze">50+</div>
-          <div class="text-sm text-slate-500 mt-1">
-            <span data-lang="lv">Kartes redaktori</span>
-            <span data-lang="en">Map Editors</span>
-          </div>
-        </div>
-        <div>
-          <div class="text-3xl font-bold text-waze">24/7</div>
-          <div class="text-sm text-slate-500 mt-1">
-            <span data-lang="lv">Reāllaika dati</span>
-            <span data-lang="en">Real-time data</span>
-          </div>
-        </div>
-        <div>
-          <div class="text-3xl font-bold text-waze">LV</div>
-          <div class="text-sm text-slate-500 mt-1">
-            <span data-lang="lv">Vietējā kopiena</span>
-            <span data-lang="en">Local community</span>
-          </div>
-        </div>
+    <div class="wrap grid-4">
+      <div>
+        <div class="stat-num">1 200+</div>
+        <div class="stat-label"><span data-lang="lv">Aktīvie Wazeri</span><span data-lang="en">Active Wazers</span></div>
+      </div>
+      <div>
+        <div class="stat-num">50+</div>
+        <div class="stat-label"><span data-lang="lv">Kartes redaktori</span><span data-lang="en">Map Editors</span></div>
+      </div>
+      <div>
+        <div class="stat-num">24/7</div>
+        <div class="stat-label"><span data-lang="lv">Reāllaika dati</span><span data-lang="en">Real-time data</span></div>
+      </div>
+      <div>
+        <div class="stat-num">LV</div>
+        <div class="stat-label"><span data-lang="lv">Vietējā kopiena</span><span data-lang="en">Local community</span></div>
       </div>
     </div>
   </section>
 
-  <!-- Waze Live Map -->
+  <!-- Map -->
   <section class="section-map">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center mb-8">
-        <h2 class="section-title">
-          <span data-lang="lv">Dzīvā Waze karte</span>
-          <span data-lang="en">Live Waze Map</span>
-        </h2>
-        <p class="section-subtitle">
-          <span data-lang="lv">Reāllaika satiksme Latvijā</span>
-          <span data-lang="en">Real-time traffic in Latvia</span>
-        </p>
-      </div>
+    <div class="wrap">
+      <h2 class="section-title">
+        <span data-lang="lv">Dzīvā Waze karte</span>
+        <span data-lang="en">Live Waze Map</span>
+      </h2>
+      <p class="section-subtitle">
+        <span data-lang="lv">Reāllaika satiksme Latvijā</span>
+        <span data-lang="en">Real-time traffic in Latvia</span>
+      </p>
       <div class="waze-map">
-        <iframe 
-          src="https://embed.waze.com/iframe?zoom=10&lat=56.9496&lon=24.1052&pin=1" 
-          allowfullscreen
-          loading="lazy"
-          title="Waze Live Map – Latvia">
-        </iframe>
+        <iframe src="https://embed.waze.com/iframe?zoom=10&lat=56.9496&lon=24.1052&pin=1" allowfullscreen loading="lazy" title="Waze Live Map – Latvia"></iframe>
       </div>
     </div>
   </section>
 
-  <!-- Quick links / Cards -->
+  <!-- Cards -->
   <section class="section-cards">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="grid md:grid-cols-3 gap-6">
-        <a href="jaunumi.html" class="card">
-          <div class="text-3xl mb-3">📰</div>
-          <h3 class="font-bold text-lg mb-2">
-            <span data-lang="lv">Jaunumi</span>
-            <span data-lang="en">News</span>
-          </h3>
-          <p class="text-slate-600 text-sm">
-            <span data-lang="lv">Seko līdzi kartes atjauninājumiem un kopienas ziņām.</span>
-            <span data-lang="en">Follow map updates and community news.</span>
-          </p>
-        </a>
-        <a href="notikumi.html" class="card">
-          <div class="text-3xl mb-3">📅</div>
-          <h3 class="font-bold text-lg mb-2">
-            <span data-lang="lv">Notikumi</span>
-            <span data-lang="en">Events</span>
-          </h3>
-          <p class="text-slate-600 text-sm">
-            <span data-lang="lv">Ceļu slēgumi, tikšanās un kartes maratoni.</span>
-            <span data-lang="en">Road closures, meetups and mapathons.</span>
-          </p>
-        </a>
-        <a href="palidziba.html" class="card">
-          <div class="text-3xl mb-3">❓</div>
-          <h3 class="font-bold text-lg mb-2">
-            <span data-lang="lv">Palīdzība</span>
-            <span data-lang="en">Help</span>
-          </h3>
-          <p class="text-slate-600 text-sm">
-            <span data-lang="lv">Kā ziņot, kā kļūt par redaktoru un bieži uzdotie jautājumi.</span>
-            <span data-lang="en">How to report, become an editor and FAQs.</span>
-          </p>
-        </a>
-      </div>
+    <div class="wrap grid-3">
+      <a href="jaunumi.html" class="card">
+        <div class="card-icon">📰</div>
+        <h3 class="card-title"><span data-lang="lv">Jaunumi</span><span data-lang="en">News</span></h3>
+        <p class="card-text"><span data-lang="lv">Seko līdzi kartes atjauninājumiem un kopienas ziņām.</span><span data-lang="en">Follow map updates and community news.</span></p>
+      </a>
+      <a href="notikumi.html" class="card">
+        <div class="card-icon">📅</div>
+        <h3 class="card-title"><span data-lang="lv">Notikumi</span><span data-lang="en">Events</span></h3>
+        <p class="card-text"><span data-lang="lv">Ceļu slēgumi, tikšanās un kartes maratoni.</span><span data-lang="en">Road closures, meetups and mapathons.</span></p>
+      </a>
+      <a href="palidziba.html" class="card">
+        <div class="card-icon">❓</div>
+        <h3 class="card-title"><span data-lang="lv">Palīdzība</span><span data-lang="en">Help</span></h3>
+        <p class="card-text"><span data-lang="lv">Kā ziņot, kā kļūt par redaktoru un bieži uzdotie jautājumi.</span><span data-lang="en">How to report, become an editor and FAQs.</span></p>
+      </a>
     </div>
   </section>
 
   <!-- Partners -->
   <section class="section-partners">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-    <div class="text-center mb-8">
-      <h2 class="text-2xl font-bold mb-2">
-        <span data-lang="lv">Partneri</span>
-        <span data-lang="en">Partners</span>
-      </h2>
-      <p class="text-slate-600 text-sm">
-        <span data-lang="lv">Sadarbojamies ar vietējām organizācijām</span>
-        <span data-lang="en">Working with local organizations</span>
-      </p>
-    </div>
-    <div class="flex flex-wrap justify-center gap-8 items-center opacity-70">
-      <div class="px-6 py-3 bg-slate-50 rounded-xl border border-slate-100 text-sm font-medium">
-        Rīgas Satiksmes departaments
+    <div class="wrap">
+      <h2 class="section-title"><span data-lang="lv">Partneri</span><span data-lang="en">Partners</span></h2>
+      <p class="section-subtitle"><span data-lang="lv">Sadarbojamies ar vietējām organizācijām</span><span data-lang="en">Working with local organizations</span></p>
+      <div class="partner-list">
+        <div class="partner-item">Rīgas Satiksmes departaments</div>
+        <div class="partner-item">Partneris 2</div>
+        <div class="partner-item">Partneris 3</div>
+        <div class="partner-item">Partneris 4</div>
       </div>
-      <div class="px-6 py-3 bg-slate-50 rounded-xl border border-slate-100 text-sm font-medium text-slate-400">
-        Partneris 2
-      </div>
-      <div class="px-6 py-3 bg-slate-50 rounded-xl border border-slate-100 text-sm font-medium text-slate-400">
-        Partneris 3
-      </div>
-      <div class="px-6 py-3 bg-slate-50 rounded-xl border border-slate-100 text-sm font-medium text-slate-400">
-        Partneris 4
-      </div>
-    </div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="site-footer">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-      <div class="grid md:grid-cols-3 gap-8">
+    <div class="wrap">
+      <div class="footer-grid">
         <div>
-          <div class="flex items-center gap-2 font-bold text-white text-lg mb-3">
-            <span>🚗</span> Waze Latvija
-          </div>
-          <p class="text-sm">
-            <span data-lang="lv">Kopā ātrāk un drošāk!</span>
-            <span data-lang="en">Together faster and safer!</span>
-          </p>
+          <div class="footer-brand">🚗 Waze Latvija</div>
+          <p><span data-lang="lv">Kopā ātrāk un drošāk!</span><span data-lang="en">Together faster and safer!</span></p>
         </div>
         <div>
-          <h4 class="font-semibold text-white mb-3 text-sm">
-            <span data-lang="lv">Saites</span>
-            <span data-lang="en">Links</span>
-          </h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="index.html" class="hover:text-waze">Galvena</a></li>
-            <li><a href="jaunumi.html" class="hover:text-waze">Jaunumi</a></li>
-            <li><a href="notikumi.html" class="hover:text-waze">Notikumi</a></li>
-            <li><a href="kontakts.html" class="hover:text-waze">Kontakts</a></li>
+          <h4 class="footer-title"><span data-lang="lv">Saites</span><span data-lang="en">Links</span></h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Galvena</a></li>
+            <li><a href="jaunumi.html">Jaunumi</a></li>
+            <li><a href="notikumi.html">Notikumi</a></li>
+            <li><a href="kontakts.html">Kontakts</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="font-semibold text-white mb-3 text-sm">
-            <span data-lang="lv">Kontakti</span>
-            <span data-lang="en">Contact</span>
-          </h4>
-          <ul class="space-y-2 text-sm">
-            <li>
-              <a href="https://www.facebook.com/WazeLV" target="_blank" class="hover:text-waze">Facebook @WazeLV</a>
-            </li>
-            <li>
-              <a href="mailto:wazelatvia@gmail.com" class="hover:text-waze">wazelatvia@gmail.com</a>
-            </li>
-            <li class="pt-2">
-              <a href="https://www.waze.com/editor" target="_blank" class="inline-block btn-secondary px-4 py-2 rounded-lg text-sm font-medium">
-                Atvērt WME
-              </a>
-            </li>
+          <h4 class="footer-title"><span data-lang="lv">Kontakti</span><span data-lang="en">Contact</span></h4>
+          <ul class="footer-links">
+            <li><a href="https://www.facebook.com/WazeLV" target="_blank">Facebook @WazeLV</a></li>
+            <li><a href="mailto:wazelatvia@gmail.com">wazelatvia@gmail.com</a></li>
+            <li class="mt-2"><a href="https://www.waze.com/editor" target="_blank" class="btn btn-red btn-sm">Atvērt WME</a></li>
           </ul>
         </div>
       </div>
-      <div class="border-t border-slate-800 mt-10 pt-6 text-center text-xs text-slate-500">
-        © 2026 Waze Latvija Community · <a href="https://www.wazers.lv" class="hover:text-waze">wazers.lv</a>
-      </div>
+      <div class="footer-copy">© 2026 Waze Latvija Community · <a href="https://www.wazers.lv">wazers.lv</a></div>
     </div>
   </footer>
 

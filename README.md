@@ -114,24 +114,33 @@ wazers-lv/
 ---
 
 
-## CSS class structure (clean naming)
+## CSS class structure (short & clear)
 
 | Class | Purpose |
 |-------|---------|
-| `page` + `page-home` / `page-news` / … | Body of each page |
-| `site-header` | Top navigation bar |
-| `site-footer` | Footer |
-| `main-banner` | Homepage hero/banner |
-| `main-banner-title` / `main-banner-subtitle` | Banner text (with outline) |
-| `section-stats` | Stats/counter strip |
-| `section-map` | Live Waze map block |
-| `section-cards` | Quick-link cards |
-| `section-partners` | Partners block |
-| `page-content` | Main content area on inner pages |
-| `page-title` / `page-intro` | Page heading + intro text |
-| `card` | Content / link cards |
-| `waze-map` | Live map container |
-| `btn-primary` / `btn-secondary` | Buttons |
+| `page` + `page-home` / `page-news` … | Body |
+| `wrap` | Max-width container |
+| `row` / `row-between` / `row-center` | Flex rows |
+| `col` | Flex column |
+| `grid-2` / `grid-3` / `grid-4` | Responsive grids |
+| `site-header` / `site-footer` | Header & footer |
+| `logo` / `nav` / `header-actions` | Header parts |
+| `lang-switch` / `lang-btn` | Language toggle |
+| `menu-btn` / `mobile-menu` | Mobile menu |
+| `btn` / `btn-blue` / `btn-red` / `btn-sm` / `btn-icon` | Buttons |
+| `main-banner` / `main-banner-title` / `main-banner-subtitle` | Homepage banner |
+| `section-stats` / `section-map` / `section-cards` / `section-partners` | Homepage sections |
+| `stat-num` / `stat-label` | Stats |
+| `card` / `card-icon` / `card-title` / `card-text` | Cards |
+| `event` / `event-date` / `event-body` | Event rows |
+| `badge` / `badge-green` / `badge-amber` / `badge-gray` | Status badges |
+| `page-content` / `page-title` / `page-intro` | Inner pages |
+| `waze-map` | Live map |
+| `form-group` / `form-label` / `form-input` / `form-note` | Forms |
+| `info-box` | Info panels |
+| `footer-grid` / `footer-brand` / `footer-title` / `footer-links` / `footer-copy` | Footer |
+| `text-blue` / `text-red` | Brand colors |
+| `partner-list` / `partner-item` | Partners |
 
 
 ## Colors

@@ -4,184 +4,141 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kontakts – Waze Latvija</title>
+  <meta name="description" content="Kontakts – Waze Latvija">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>
-    tailwind.config = {
-      darkMode: 'class', theme: { extend: { colors: { waze: '#0099FF', latvia: '#9E3039' } } } }
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { waze: '#0099FF', latvia: '#9E3039' } } } }
   </script>
 </head>
-<body class="page page-contact">
 
+<body class="page page-contact">
   <header class="site-header">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="flex items-center justify-between h-16">
-        <a href="index.html" class="flex items-center gap-2 font-bold text-lg">
-          <img src="assets/logo.png" alt="Waze Latvija" class="h-10 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
-          <span class="text-2xl" style="display:none">🚗</span>
-          <span class="text-waze">Waze</span>
-          <span class="text-latvia">Latvija</span>
-        </a>
-                <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
-          <a href="index.html" class="nav-link text-slate-600 hover:text-waze"><span data-lang="lv">Galvena</span><span data-lang="en">Home</span></a>
-          <a href="jaunumi.html" class="nav-link text-slate-600 hover:text-waze"><span data-lang="lv">Jaunumi</span><span data-lang="en">News</span></a>
-          <a href="notikumi.html" class="nav-link text-slate-600 hover:text-waze"><span data-lang="lv">Notikumi</span><span data-lang="en">Events</span></a>
-          <a href="svariga.html" class="nav-link text-slate-600 hover:text-waze"><span data-lang="lv">Svarīga Informācija</span><span data-lang="en">Important Info</span></a>
-          <a href="palidziba.html" class="nav-link text-slate-600 hover:text-waze"><span data-lang="lv">Palīdzība</span><span data-lang="en">Help</span></a>
-          <a href="kontakts.html" class="nav-link text-waze"><span data-lang="lv">Kontakts</span><span data-lang="en">Contact</span></a>
-        </nav>
-        <div class="hidden md:flex items-center gap-3">
-          <button id="dark-mode-toggle" class="p-2 rounded-lg hover:bg-slate-100 text-xl" aria-label="Toggle dark mode">🌙</button>
-          <div class="flex rounded-lg overflow-hidden border border-slate-200 text-xs font-medium">
-            <button data-set-lang="lv" class="lang-btn px-3 py-1.5 active bg-waze text-white">LV</button>
-            <button data-set-lang="en" class="lang-btn px-3 py-1.5 bg-gray-100 text-gray-700">EN</button>
-          </div>
+    <div class="wrap row-between">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="Waze Latvija" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
+        <span style="display:none">🚗</span>
+        <span class="text-blue">Waze</span>
+        <span class="text-red">Latvija</span>
+      </a>
+      <nav class="nav">
+        <a href="index.html"><span data-lang="lv">Galvena</span><span data-lang="en">Home</span></a>
+        <a href="jaunumi.html"><span data-lang="lv">Jaunumi</span><span data-lang="en">News</span></a>
+        <a href="notikumi.html"><span data-lang="lv">Notikumi</span><span data-lang="en">Events</span></a>
+        <a href="svariga.html"><span data-lang="lv">Svarīga Informācija</span><span data-lang="en">Important Info</span></a>
+        <a href="palidziba.html"><span data-lang="lv">Palīdzība</span><span data-lang="en">Help</span></a>
+        <a href="kontakts.html" class="active"><span data-lang="lv">Kontakts</span><span data-lang="en">Contact</span></a>
+      </nav>
+      <div class="header-actions">
+        <button id="dark-mode-toggle" class="btn-icon" aria-label="Toggle dark mode">🌙</button>
+        <div class="lang-switch">
+          <button data-set-lang="lv" class="lang-btn active">LV</button>
+          <button data-set-lang="en" class="lang-btn">EN</button>
         </div>
-        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-slate-100">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-        </button>
       </div>
-      <div id="mobile-menu" class="hidden md:hidden pb-4">
-        <nav class="flex flex-col gap-2 text-sm font-medium">
-          <a href="index.html" class="px-3 py-2 rounded-lg hover:bg-slate-50"><span data-lang="lv">Galvena</span><span data-lang="en">Home</span></a>
-          <a href="jaunumi.html" class="px-3 py-2 rounded-lg hover:bg-slate-50"><span data-lang="lv">Jaunumi</span><span data-lang="en">News</span></a>
-          <a href="notikumi.html" class="px-3 py-2 rounded-lg hover:bg-slate-50"><span data-lang="lv">Notikumi</span><span data-lang="en">Events</span></a>
-          <a href="svariga.html" class="px-3 py-2 rounded-lg hover:bg-slate-50"><span data-lang="lv">Svarīga Informācija</span><span data-lang="en">Important Info</span></a>
-          <a href="palidziba.html" class="px-3 py-2 rounded-lg hover:bg-slate-50"><span data-lang="lv">Palīdzība</span><span data-lang="en">Help</span></a>
-          <a href="kontakts.html" class="px-3 py-2 rounded-lg bg-waze/10 text-waze"><span data-lang="lv">Kontakts</span><span data-lang="en">Contact</span></a>
-</nav>
+      <button id="mobile-menu-btn" class="menu-btn" aria-label="Menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="mobile-menu hidden">
+      <div class="wrap">
+        <nav>
+          <a href="index.html"><span data-lang="lv">Galvena</span><span data-lang="en">Home</span></a>
+          <a href="jaunumi.html"><span data-lang="lv">Jaunumi</span><span data-lang="en">News</span></a>
+          <a href="notikumi.html"><span data-lang="lv">Notikumi</span><span data-lang="en">Events</span></a>
+          <a href="svariga.html"><span data-lang="lv">Svarīga Informācija</span><span data-lang="en">Important Info</span></a>
+          <a href="palidziba.html"><span data-lang="lv">Palīdzība</span><span data-lang="en">Help</span></a>
+          <a href="kontakts.html" class="active"><span data-lang="lv">Kontakts</span><span data-lang="en">Contact</span></a>
+          <div class="row mt-2">
+            <button class="dark-mode-toggle btn-icon" aria-label="Toggle dark mode">🌙</button>
+            <button data-set-lang="lv" class="lang-btn active">LV</button>
+            <button data-set-lang="en" class="lang-btn">EN</button>
+          </div>
+        </nav>
       </div>
     </div>
   </header>
-
   <main class="page-content">
-    <h1 class="page-title">
-      <span data-lang="lv">Kontakts ar mums</span>
-      <span data-lang="en">Contact Us</span>
-    </h1>
-    <p class="page-intro">
-      <span data-lang="lv">Rakstiet mums jautājumus, partnerības piedāvājumus vai redaktora palīdzību.</span>
-      <span data-lang="en">Write to us with questions, partnership offers or editor help.</span>
-    </p>
-
-    <div class="grid md:grid-cols-2 gap-10">
-      <!-- Contact form -->
+    <h1 class="page-title"><span data-lang="lv">Kontakts ar mums</span><span data-lang="en">Contact Us</span></h1>
+    <p class="page-intro"><span data-lang="lv">Rakstiet mums jautājumus, partnerības piedāvājumus vai redaktora palīdzību.</span><span data-lang="en">Write to us with questions, partnership offers or editor help.</span></p>
+    <div class="grid-2">
       <div>
-        <form id="contact-form" action="mailto:wazelatvia@gmail.com" method="post" enctype="text/plain" class="space-y-4">
-          <div>
-            <label class="block text-sm font-medium mb-1">
-              <span data-lang="lv">Vārds</span>
-              <span data-lang="en">Name</span>
-            </label>
-            <input type="text" name="name" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-waze">
+        <form id="contact-form" action="mailto:wazelatvia@gmail.com" method="post" enctype="text/plain">
+          <div class="form-group">
+            <label class="form-label"><span data-lang="lv">Vārds</span><span data-lang="en">Name</span></label>
+            <input type="text" name="name" required class="form-input">
           </div>
-          <div>
-            <label class="block text-sm font-medium mb-1">E-pasts</label>
-            <input type="email" name="email" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-waze">
+          <div class="form-group">
+            <label class="form-label">E-pasts</label>
+            <input type="email" name="email" required class="form-input">
           </div>
-          <div>
-            <label class="block text-sm font-medium mb-1">
-              <span data-lang="lv">Temats</span>
-              <span data-lang="en">Subject</span>
-            </label>
-            <select name="subject" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-waze">
-              <option value="general">
-                <span data-lang="lv">Vispārējs jautājums</span>
-              </option>
+          <div class="form-group">
+            <label class="form-label"><span data-lang="lv">Temats</span><span data-lang="en">Subject</span></label>
+            <select name="subject" class="form-input">
+              <option value="general">Vispārējs jautājums / General</option>
               <option value="partner">Partner inquiry</option>
-              <option value="editor">
-                <span data-lang="lv">Redaktora palīdzība</span>
-              </option>
+              <option value="editor">Redaktora palīdzība / Editor help</option>
               <option value="other">Other</option>
             </select>
           </div>
-          <div>
-            <label class="block text-sm font-medium mb-1">
-              <span data-lang="lv">Ziņa</span>
-              <span data-lang="en">Message</span>
-            </label>
-            <textarea name="message" rows="5" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-waze"></textarea>
+          <div class="form-group">
+            <label class="form-label"><span data-lang="lv">Ziņa</span><span data-lang="en">Message</span></label>
+            <textarea name="message" rows="5" required class="form-input"></textarea>
           </div>
-          <button type="submit" class="btn-primary w-full py-3 rounded-xl font-medium">
-            <span data-lang="lv">Nosūtīt</span>
-            <span data-lang="en">Send</span>
+          <button type="submit" class="btn btn-blue" style="width:100%;">
+            <span data-lang="lv">Nosūtīt</span><span data-lang="en">Send</span>
           </button>
         </form>
-        <p class="text-xs text-slate-400 mt-3">
-          <span data-lang="lv">Pašlaik forma atver e-pasta klientu. Lai saņemtu ziņas tieši uz e-pastu bez klienta, izveidojiet bezmaksas kontu formspree.io un ierakstiet endpoint failā js/config.js</span>
-          <span data-lang="en">Currently the form opens the email client. To receive messages directly, create a free form at formspree.io and put the endpoint in js/config.js</span>
+        <p class="form-note">
+          <span data-lang="lv">Pašlaik forma atver e-pasta klientu. Lai saņemtu ziņas tieši, izveidojiet formu formspree.io un ierakstiet endpoint failā js/config.js</span>
+          <span data-lang="en">Currently opens email client. For direct delivery, create a form at formspree.io and put the endpoint in js/config.js</span>
         </p>
       </div>
-
-      <!-- Contact info -->
-      <div class="space-y-6">
-        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100">
-          <h2 class="font-bold mb-3">
-            <span data-lang="lv">Tiešie kontakti</span>
-            <span data-lang="en">Direct contacts</span>
-          </h2>
-          <ul class="space-y-3 text-sm">
-            <li>
-              <span class="text-slate-500">E-pasts:</span><br>
-              <a href="mailto:wazelatvia@gmail.com" class="text-waze font-medium">wazelatvia@gmail.com</a>
-            </li>
-            <li>
-              <span class="text-slate-500">Facebook:</span><br>
-              <a href="https://www.facebook.com/WazeLV" target="_blank" class="text-waze font-medium">@WazeLV</a>
-            </li>
-            <li>
-              <span class="text-slate-500">WME:</span><br>
-              <a href="https://www.waze.com/editor" target="_blank" class="text-waze font-medium">waze.com/editor</a>
-            </li>
+      <div class="col">
+        <div class="info-box">
+          <h2 class="card-title mb-2"><span data-lang="lv">Tiešie kontakti</span><span data-lang="en">Direct contacts</span></h2>
+          <ul class="footer-links">
+            <li>E-pasts:<br><a href="mailto:wazelatvia@gmail.com" class="text-blue">wazelatvia@gmail.com</a></li>
+            <li>Facebook:<br><a href="https://www.facebook.com/WazeLV" target="_blank" class="text-blue">@WazeLV</a></li>
+            <li>WME:<br><a href="https://www.waze.com/editor" target="_blank" class="text-blue">waze.com/editor</a></li>
           </ul>
         </div>
-
-        <div class="bg-latvia/5 rounded-2xl p-6 border border-latvia/20">
-          <h2 class="font-bold mb-2 text-latvia">
-            <span data-lang="lv">Kļūt par redaktoru</span>
-            <span data-lang="en">Become an Editor</span>
-          </h2>
-          <p class="text-sm text-slate-600 mb-4">
-            <span data-lang="lv">Pievienojies Discord (placeholder) un sāc rediģēt karti.</span>
-            <span data-lang="en">Join Discord (placeholder) and start editing the map.</span>
-          </p>
-          <a href="#" class="btn-secondary inline-block px-5 py-2.5 rounded-xl text-sm font-medium">
-            Discord (placeholder)
-          </a>
+        <div class="info-box red">
+          <h2 class="card-title text-red mb-2"><span data-lang="lv">Kļūt par redaktoru</span><span data-lang="en">Become an Editor</span></h2>
+          <p class="card-text mb-2"><span data-lang="lv">Pievienojies Discord (placeholder) un sāc rediģēt karti.</span><span data-lang="en">Join Discord (placeholder) and start editing the map.</span></p>
+          <a href="#" class="btn btn-red btn-sm">Discord (placeholder)</a>
         </div>
       </div>
     </div>
   </main>
-
   <footer class="site-footer">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-      <div class="grid md:grid-cols-3 gap-8">
+    <div class="wrap">
+      <div class="footer-grid">
         <div>
-          <div class="flex items-center gap-2 font-bold text-white text-lg mb-3"><span>🚗</span> Waze Latvija</div>
-          <p class="text-sm"><span data-lang="lv">Kopā ātrāk un drošāk!</span><span data-lang="en">Together faster and safer!</span></p>
+          <div class="footer-brand">🚗 Waze Latvija</div>
+          <p><span data-lang="lv">Kopā ātrāk un drošāk!</span><span data-lang="en">Together faster and safer!</span></p>
         </div>
         <div>
-          <h4 class="font-semibold text-white mb-3 text-sm"><span data-lang="lv">Saites</span><span data-lang="en">Links</span></h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="index.html" class="hover:text-waze">Galvena</a></li>
-            <li><a href="jaunumi.html" class="hover:text-waze">Jaunumi</a></li>
-            <li><a href="notikumi.html" class="hover:text-waze">Notikumi</a></li>
-            <li><a href="kontakts.html" class="hover:text-waze">Kontakts</a></li>
+          <h4 class="footer-title"><span data-lang="lv">Saites</span><span data-lang="en">Links</span></h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Galvena</a></li>
+            <li><a href="jaunumi.html">Jaunumi</a></li>
+            <li><a href="notikumi.html">Notikumi</a></li>
+            <li><a href="kontakts.html">Kontakts</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="font-semibold text-white mb-3 text-sm"><span data-lang="lv">Kontakti</span><span data-lang="en">Contact</span></h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="https://www.facebook.com/WazeLV" target="_blank" class="hover:text-waze">Facebook @WazeLV</a></li>
-            <li><a href="mailto:wazelatvia@gmail.com" class="hover:text-waze">wazelatvia@gmail.com</a></li>
-            <li class="pt-2"><a href="https://www.waze.com/editor" target="_blank" class="inline-block btn-secondary px-4 py-2 rounded-lg text-sm font-medium">Atvērt WME</a></li>
+          <h4 class="footer-title"><span data-lang="lv">Kontakti</span><span data-lang="en">Contact</span></h4>
+          <ul class="footer-links">
+            <li><a href="https://www.facebook.com/WazeLV" target="_blank">Facebook @WazeLV</a></li>
+            <li><a href="mailto:wazelatvia@gmail.com">wazelatvia@gmail.com</a></li>
+            <li class="mt-2"><a href="https://www.waze.com/editor" target="_blank" class="btn btn-red btn-sm">Atvērt WME</a></li>
           </ul>
         </div>
       </div>
-      <div class="border-t border-slate-800 mt-10 pt-6 text-center text-xs text-slate-500">
-        © 2026 Waze Latvija Community · <a href="https://www.wazers.lv" class="hover:text-waze">wazers.lv</a>
-      </div>
+      <div class="footer-copy">© 2026 Waze Latvija Community · <a href="https://www.wazers.lv">wazers.lv</a></div>
     </div>
   </footer>
 
