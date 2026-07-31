@@ -64,16 +64,70 @@
     <h1 class="page-title"><span data-lang="lv">Jaunumi</span><span data-lang="en">News</span></h1>
     <p class="page-intro"><span data-lang="lv">Kartes atjauninājumi, kopienas ziņas un padomi no Waze Latvija.</span><span data-lang="en">Map updates, community news and tips from Waze Latvia.</span></p>
 
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/lv_LV/sdk.js#xfbml=1&version=v19.0"></script>
-    <div class="card" style="overflow:hidden;">
-      <div class="fb-page" data-href="https://www.facebook.com/WazeLV" data-tabs="timeline" data-width="" data-height="600" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"></div>
-      <p style="text-align:center; margin-top:1rem; font-size:0.875rem;">
-        <a href="https://www.facebook.com/WazeLV" target="_blank" rel="noopener" class="text-blue">@WazeLV uz Facebook →</a>
+        <!-- Facebook feed – full width of card -->
+    <div class="card fb-card">
+      <div id="fb-root"></div>
+      <div class="fb-embed" id="fb-embed-box">
+        <div class="fb-page"
+             data-href="https://www.facebook.com/WazeLV"
+             data-tabs="timeline"
+             data-width="500"
+             data-height="700"
+             data-small-header="false"
+             data-adapt-container-width="true"
+             data-hide-cover="false"
+             data-show-facepile="true">
+          <blockquote cite="https://www.facebook.com/WazeLV" class="fb-xfbml-parse-ignore">
+            <a href="https://www.facebook.com/WazeLV">WazeLV on Facebook</a>
+          </blockquote>
+        </div>
+      </div>
+      <p class="fb-fallback">
+        <a href="https://www.facebook.com/WazeLV" target="_blank" rel="noopener" class="btn btn-blue btn-sm">
+          <span data-lang="lv">Atvērt @WazeLV Facebook</span>
+          <span data-lang="en">Open @WazeLV on Facebook</span>
+        </a>
       </p>
     </div>
+    <script>
+      // Load Facebook SDK and size plugin to full card width
+      (function() {
+        function initFb() {
+          var box = document.getElementById('fb-embed-box');
+          if (!box) return;
+          var w = Math.floor(box.clientWidth);
+          if (w < 180) w = 320;
+          if (w > 500) w = 500; // FB Page Plugin max width is 500px
+          var page = box.querySelector('.fb-page');
+          if (page) page.setAttribute('data-width', String(w));
 
-    <div class="grid-2 mt-4">
+          if (window.FB) {
+            FB.XFBML.parse(box);
+          }
+        }
+
+        window.fbAsyncInit = function() {
+          FB.init({ xfbml: true, version: 'v19.0' });
+          initFb();
+        };
+
+        if (!document.getElementById('facebook-jssdk')) {
+          var s = document.createElement('script');
+          s.id = 'facebook-jssdk';
+          s.async = true;
+          s.defer = true;
+          s.crossOrigin = 'anonymous';
+          s.src = 'https://connect.facebook.net/lv_LV/sdk.js';
+          document.body.appendChild(s);
+        }
+
+        window.addEventListener('resize', function() {
+          if (window.FB) initFb();
+        });
+      })();
+    </script>
+
+    <div class="card general">
       <article class="card">
         <div style="font-size:0.75rem; color:#94a3b8; margin-bottom:0.5rem;">2026. gada maijs</div>
         <h2 class="card-title">Jauns kartes atjauninājums Rīgā</h2>
