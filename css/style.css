@@ -164,7 +164,10 @@ a { color: inherit; }
 }
 .logo img {
   height: 2.5rem;
-  width: auto;
+  width: 2.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
 }
 
 .nav {
@@ -361,7 +364,7 @@ a { color: inherit; }
   font-weight: 500;
 }
 
-/* ---------- Facebook Main updates ---------- */
+/* ---------- Cards ---------- */
 .card {
   background: #fff;
   border-radius: 1rem;
@@ -651,3 +654,155 @@ img, iframe { max-width: 100%; height: auto; }
 .mt-4 { margin-top: 1rem; }
 .mb-2 { margin-bottom: 0.5rem; }
 .opacity-70 { opacity: 0.7; }
+
+
+/* ---------- Facebook embed ---------- */
+.fb-card {
+  padding: 0;
+  overflow: hidden;
+}
+.fb-embed {
+  width: 100%;
+  min-height: 700px;
+  display: flex;
+  justify-content: center;
+  background: #f8fafc;
+}
+.fb-embed .fb-page,
+.fb-embed iframe {
+  width: 100% !important;
+  max-width: 100%;
+}
+.fb-fallback {
+  text-align: center;
+  padding: 1rem;
+  margin: 0;
+  border-top: 1px solid var(--border);
+}
+html.dark .fb-embed {
+  background: var(--dark2);
+}
+html.dark .fb-fallback {
+  border-color: #334155;
+}
+
+/* ---------- Download modal ---------- */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.modal.hidden {
+  display: none !important;
+}
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(4px);
+}
+.modal-box {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 22rem;
+  background: #fff;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  padding: 1.75rem 1.5rem 1.5rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+.modal-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--muted);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+}
+.modal-close:hover {
+  background: #f1f5f9;
+  color: var(--text);
+}
+.modal-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-align: center;
+}
+.modal-text {
+  margin: 0 0 1.25rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.btn-store {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: 0.75rem;
+  text-decoration: none;
+  color: #fff;
+  transition: transform 0.15s, opacity 0.2s;
+}
+.btn-store:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+.btn-ios {
+  background: #000;
+}
+.btn-android {
+  background: #01875f;
+}
+.store-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.store-label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.2;
+  text-align: left;
+}
+.store-label small {
+  font-size: 0.7rem;
+  opacity: 0.85;
+  font-weight: 400;
+}
+.store-label strong {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+html.dark .modal-box {
+  background: var(--dark2);
+  border-color: #334155;
+  color: #e2e8f0;
+}
+html.dark .modal-close:hover {
+  background: #334155;
+  color: #e2e8f0;
+}
+html.dark .modal-text {
+  color: #94a3b8;
+}
