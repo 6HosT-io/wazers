@@ -3,8 +3,8 @@
 document.addEventListener('DOMContentLoaded', function () {
   // Maintenance mode
   if (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.MAINTENANCE_MODE === true) {
-    if (window.location.href.indexOf('maintenance.html') === -1) {
-      window.location.replace('maintenance.html');
+    if (window.location.href.indexOf('maintenance') === -1) {
+      window.location.replace('/maintenance');
       return;
     }
   }
@@ -82,4 +82,30 @@ document.addEventListener('DOMContentLoaded', function () {
     form.setAttribute('action', SITE_CONFIG.FORMSPREE_ENDPOINT);
     form.setAttribute('method', 'POST');
   }
+  // Download app modal
+  const downloadModal = document.getElementById('download-modal');
+  if (downloadModal) {
+    const openBtns = document.querySelectorAll('[data-open-download]');
+    const closeEls = document.querySelectorAll('[data-close-download]');
+
+    function openDownloadModal() {
+      downloadModal.classList.remove('hidden');
+      downloadModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDownloadModal() {
+      downloadModal.classList.add('hidden');
+      downloadModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    openBtns.forEach(btn => btn.addEventListener('click', openDownloadModal));
+    closeEls.forEach(el => el.addEventListener('click', closeDownloadModal));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && !downloadModal.classList.contains('hidden')) {
+        closeDownloadModal();
+      }
+    });
+  }
+
 });
