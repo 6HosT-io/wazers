@@ -841,3 +841,71 @@ html.dark .modal-text {
     max-width: 100%;
   }
 }
+
+
+/* ---------- Policy pages ---------- */
+.policy-block {
+  margin-bottom: 1rem;
+}
+.policy-block p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ---------- Cookie consent banner ---------- */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 90;
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.25);
+}
+.cookie-banner-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+}
+.cookie-banner-text {
+  flex: 1;
+  min-width: 220px;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  margin: 0;
+}
+.cookie-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.cookie-banner .btn {
+  font-size: 0.8125rem;
+  padding: 0.5rem 0.9rem;
+}
+.btn-outline {
+  background: transparent;
+  color: #e2e8f0;
+  border: 1px solid #475569;
+  border-radius: 0.75rem;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.btn-outline:hover {
+  border-color: #94a3b8;
+  background: rgba(255,255,255,0.06);
+}
+html.dark .cookie-banner {
+  background: #020617;
+  border-top: 1px solid #334155;
+}
