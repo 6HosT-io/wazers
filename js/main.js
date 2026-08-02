@@ -108,4 +108,65 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+
+  // Cookie consent banner
+  const CONSENT_KEY = 'wazers-cookie-consent';
+  function getConsent() {
+    return localStorage.getItem(CONSENT_KEY);
+  }
+  function setConsent(value) {
+    localStorage.setItem(CONSENT_KEY, value);
+    window.dispatchEvent(new CustomEvent('wazers-consent', { detail: value }));
+  }
+  window.wazersHasCookieConsent = function () {
+    const v = getConsent();
+    return v === 'all' || v === 'nonessential';
+  };
+
+  if (!getConsent()) {
+    const banner = document.createElement('div');
+    banner.className = 'cookie-banner';
+    banner.id = 'cookie-banner';
+    banner.setAttribute('role', 'dialog');
+    banner.setAttribute('aria-label', 'Cookie consent');
+    banner.innerHTML = `
+      <div class="cookie-banner-inner">
+        <p class="cookie-banner-text">
+          <span data-lang="lv">Mēs izmantojam nepieciešamās tehnoloģijas vietnes darbībai un, ar jūsu piekrišanu, neobligāto saturu (piem. Facebook). </span>
+          <span data-lang="en">We use necessary technologies for the site to work and, with your consent, non-essential content (e.g. Facebook). </span>
+        </p>
+        <div class="cookie-banner-actions">
+          <button type="button" class="btn btn-blue" data-consent="all">
+            <span data-lang="lv">Piekrist visam</span>
+            <span data-lang="en">Accept all</span>
+          </button>
+          <button type="button" class="btn btn-blue" data-consent="nonessential" style="background:#0ea5e9;">
+            <span data-lang="lv">Piekrītu neobligātajām sīkdatnēm</span>
+            <span data-lang="en">I agree to non-essential cookies</span>
+          </button>
+          <a href="/cookies" class="btn-outline">
+            <span data-lang="lv">Vairāk info</span>
+            <span data-lang="en">More info</span>
+          </a>
+        </div>
+      </div>`;
+    document.body.appendChild(banner);
+
+    // Re-apply language visibility for injected nodes
+    const lang = document.documentElement.getAttribute('lang') || 'lv';
+    banner.querySelectorAll('[data-lang]').forEach(el => {
+      const show = el.getAttribute('data-lang') === lang;
+      if (el.tagName === 'SPAN' || el.tagName === 'A' || el.tagName === 'BUTTON') {
+        el.style.display = show ? (el.tagName === 'SPAN' ? 'inline' : '') : 'none';
+      }
+    });
+
+    banner.querySelectorAll('[data-consent]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        setConsent(btn.getAttribute('data-consent'));
+        banner.remove();
+      });
+    });
+  }
+
 });
