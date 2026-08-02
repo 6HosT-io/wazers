@@ -186,7 +186,7 @@ wazers-lv/
 ## How to add your logo
 
 1. Upload your logo PNG file to the `assets/` folder
-2. Name it exactly: **`logo.png`**
+2. Name it exactly: **`logo.jpg`**
 3. It will automatically appear next to “Waze Latvija” in the header on all pages
 4. Recommended size: height around 32–40px (it will be scaled with CSS `h-8`)
 
