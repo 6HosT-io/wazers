@@ -190,7 +190,7 @@ wazers-lv/
 3. It will automatically appear next to “Waze Latvija” in the header on all pages
 4. Recommended size: height around 32–40px (it will be scaled with CSS `h-8`)
 
-If the logo does not appear, check the filename is exactly `logo.png` (lowercase) and that it is inside the `assets` folder.
+If the logo does not appear, check the filename is exactly `logo.jpg` (lowercase) and that it is inside the `assets` folder.
 
 ---
 
