@@ -909,3 +909,13 @@ html.dark .cookie-banner {
   background: #020617;
   border-top: 1px solid #334155;
 }
+
+
+/* Footer logo */
+.footer-logo {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
