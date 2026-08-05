@@ -169,4 +169,32 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+
+  // Google Analytics 4 – only after cookie consent
+  function loadGoogleAnalytics() {
+    if (typeof SITE_CONFIG === 'undefined') return;
+    const id = SITE_CONFIG.GA_MEASUREMENT_ID;
+    if (!id || !String(id).trim()) return;
+    if (!(window.wazersHasCookieConsent && window.wazersHasCookieConsent())) return;
+    if (document.getElementById('ga-gtag')) return;
+
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(id);
+    s.id = 'ga-gtag';
+    document.head.appendChild(s);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { window.dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', id, {
+      anonymize_ip: true,
+      send_page_view: true
+    });
+  }
+
+  window.addEventListener('wazers-consent', loadGoogleAnalytics);
+  loadGoogleAnalytics();
+
 });
