@@ -1,43 +1,114 @@
 # Waze Latvija Community Website (Static)
 
-Fast, clean static website for the Waze Latvia community.  
-**Domain:** https://www.wazers.lv/
+Fast, clean static website for the **Waze Latvia** community.
 
-## Features
-
-- Fully responsive (desktop + mobile)
-- Bilingual (Latvian default + English) with persistent language switcher
-- Dark mode – follows system/OS preference + manual 🌙/☀️ toggle (preference is saved)
-- Live Waze Map embed on homepage
-- Facebook Page timeline embed from https://www.facebook.com/WazeLV (Jaunumi page)
-- Maintenance / Work in Progress mode (one-line toggle)
-- Custom 404 page (“Kaut kas nogāja greizi”)
-- Contact form (mailto by default + easy Formspree upgrade)
-- Very lightweight – no build step required
+| | |
+|---|---|
+| **Live site** | https://wazers.lv / https://www.wazers.lv |
+| **Domain** | nic.lv → hosted on **Garmtech** (Plesk) |
+| **Contact** | wazelatvia@gmail.com |
+| **Facebook** | https://www.facebook.com/WazeLV |
+| **Stack** | HTML · CSS · vanilla JS · Tailwind CDN · no build step |
 
 ---
 
+## Features (overview)
 
-## Clean URLs (no /index.html in the address bar)
+- Fully **responsive** (desktop + mobile)
+- **Bilingual** LV (default) + EN with persistent language switcher
+- **Dark mode** – system preference + manual toggle (saved in `localStorage`)
+- **Live Waze map** embed on homepage
+- **Facebook** timeline on Jaunumi (loads only after cookie consent)
+- **Download Waze** modal → App Store (iOS) / Google Play (Android)
+- **Cookie consent** banner + Privacy / Cookie policy pages
+- **Maintenance mode** (one flag in `js/config.js`)
+- Custom **404** page (“Kaut kas nogāja greizi”)
+- Contact form (mailto by default; Formspree optional)
+- **Clean URLs** (no `.html` in the address bar) via `.htaccess`
+- Optional **first-visit mobile splash** (slow load only)
+- Semantic CSS class names for easy editing
 
-The site includes a `.htaccess` file so addresses look like:
+---
 
-| Old | New |
-|-----|-----|
-| `https://wazers.lv/index.html` | `https://wazers.lv/` |
-| `https://wazers.lv/jaunumi.html` | `https://wazers.lv/jaunumi` |
-| `https://wazers.lv/notikumi.html` | `https://wazers.lv/notikumi` |
-| `https://wazers.lv/kontakts.html` | `https://wazers.lv/kontakts` |
-| … | … |
+## Pages
 
-**What you need to do:**
-1. Upload the `.htaccess` file to the **same folder** as `index.html` (website root).
-2. Make sure Apache `mod_rewrite` is enabled (on Garmtech/Plesk it usually is by default).
-3. Clear browser cache and open `https://wazers.lv/` — it should no longer show `/index.html`.
+| URL path | File | Purpose |
+|----------|------|---------|
+| `/` | `index.html` | Homepage – banner, stats, live map, cards, partners |
+| `/jaunumi` | `jaunumi.html` | News – Facebook embed + highlight articles |
+| `/notikumi` | `notikumi.html` | Events / closures |
+| `/svariga` | `svariga.html` | Important information |
+| `/palidziba` | `palidziba.html` | Help / FAQ |
+| `/kontakts` | `kontakts.html` | Contact form + partner / editor info |
+| `/privacy` | `privacy.html` | Privacy Policy (LV + EN) |
+| `/cookies` | `cookies.html` | Cookie Policy (LV + EN) |
+| `/maintenance` | `maintenance.html` | Work in Progress (when mode is on) |
+| *(any missing)* | `404.html` | Error page |
 
-If your hosting uses **Nginx** instead of Apache, `.htaccess` is ignored. In that case, in Plesk go to:
-**Domains → wazers.lv → Apache & nginx Settings → Additional nginx directives**
-and paste:
+---
+
+## File structure
+
+```
+wazers-lv/
+├── index.html
+├── jaunumi.html
+├── notikumi.html
+├── svariga.html
+├── palidziba.html
+├── kontakts.html
+├── privacy.html
+├── cookies.html
+├── maintenance.html
+├── 404.html
+├── .htaccess                 ← clean URLs + 404 (Apache)
+├── css/
+│   └── style.css             ← all custom styles
+├── js/
+│   ├── config.js             ← EDIT: maintenance, Formspree, contacts
+│   └── main.js               ← language, dark mode, menu, cookies, modal
+├── assets/
+│   ├── logo.jpg              ← header + footer logo (required)
+│   └── hero.jpg              ← homepage banner background (optional)
+└── README.md
+```
+
+---
+
+## Configuration (`js/config.js`)
+
+```js
+const SITE_CONFIG = {
+  MAINTENANCE_MODE: false,          // true = redirect everyone to /maintenance
+  FACEBOOK_PAGE: 'https://www.facebook.com/WazeLV',
+  CONTACT_EMAIL: 'wazelatvia@gmail.com',
+  FORMSPREE_ENDPOINT: '',           // e.g. 'https://formspree.io/f/xxxxxxxx'
+};
+```
+
+Upload only this file after changing it.
+
+---
+
+## Clean URLs
+
+`.htaccess` provides:
+
+| Request | Result |
+|---------|--------|
+| `/index.html` | → `/` |
+| `/jaunumi.html` | → `/jaunumi` |
+| `/jaunumi` | serves `jaunumi.html` |
+
+**Setup (Garmtech / Plesk + Apache):**
+
+1. Upload `.htaccess` to the **site root** (same folder as `index.html`).
+2. Show hidden files in the file manager if needed.
+3. **Index files** → custom value: `index.html`
+4. Prefer HTTPS and one canonical host (`wazers.lv` **or** `www.wazers.lv`).
+
+If the panel only offers limited Apache options, `.htaccess` is still the main tool.  
+If hosting is **Nginx-only**, add something like:
 
 ```nginx
 location / {
@@ -46,164 +117,202 @@ location / {
 error_page 404 /404.html;
 ```
 
-Internal links in the site already point to clean URLs (`/`, `/jaunumi`, `/kontakts`, etc.).
+---
 
+## Maintenance mode
 
-## How to enable / disable Maintenance Mode
+1. Open `js/config.js`
+2. Set `MAINTENANCE_MODE: true`
+3. Upload the file
 
-1. Open the file `js/config.js`
-2. Find this line:
-   ```js
-   MAINTENANCE_MODE: false,
-   ```
-3. Change it to:
-   ```js
-   MAINTENANCE_MODE: true,
-   ```
-4. Save the file and upload it to the server.
-
-**Result:**  
-All visitors are automatically redirected to `maintenance.html`.  
-The maintenance page shows:
-- “Darbs notiek / Work in Progress”
-- Link to Facebook @WazeLV (with Facebook logo)
-- Email: wazelatvia@gmail.com
-
-To turn the site back on, set `MAINTENANCE_MODE` back to `false` and upload the file again.
+Visitors are redirected to `/maintenance` (Facebook link + email).  
+Set back to `false` to reopen the site.
 
 ---
 
-## How to set up a better contact form (Formspree)
+## Download Waze modal
 
-The contact form currently opens the visitor’s email client (mailto).  
-To receive messages directly in your inbox without that step:
+Header and homepage **Lejupielādēt / Download** open a small dialog:
 
-1. Go to https://formspree.io and create a free account
-2. Create a new form
-3. Copy the endpoint URL (it looks like `https://formspree.io/f/xxxxxxxx`)
-4. Open `js/config.js` and paste it here:
-   ```js
-   FORMSPREE_ENDPOINT: 'https://formspree.io/f/xxxxxxxx',
-   ```
-5. Save and upload the file
+- **App Store (iOS)** → Apple link  
+- **Google Play (Android)** → Play Store link  
 
-The form will now send messages directly to the email you configured in Formspree.
+Close with ×, backdrop click, or Escape. Present on all main pages.
 
 ---
 
-## How to set the 404 page (Garmtech / Plesk)
+## Cookie consent & legal pages
 
-1. Log in to your Plesk panel
-2. Go to **Error Pages** (or Apache & nginx settings → Error Documents)
-3. Set the 404 error document to: `/404.html`
+- Banner on first visit (bottom): **Accept all** / **I agree to non-essential cookies** / **More info**
+- Choice stored in `localStorage` (`wazers-cookie-consent`)
+- Facebook embed on **Jaunumi** loads only after consent
+- Footer **Legal** section → `/privacy` and `/cookies`
+- Policy texts are **community templates**, not legal advice
 
-The 404 page keeps the normal header and footer so visitors can still navigate the site.  
-Main message: **“Kaut kas nogāja greizi”** / “Something went wrong”.
+**localStorage keys used by the site:**
 
----
-
-## Performance notes (already applied)
-
-- Tailwind CSS via CDN
-- Preconnect for Google Fonts
-- Facebook SDK loaded asynchronously
-- Minimal custom CSS
-- No heavy frameworks or build tools
+| Key | Purpose |
+|-----|---------|
+| `wazers-lang` | LV / EN |
+| `wazers-theme` | light / dark |
+| `wazers-cookie-consent` | `all` or `nonessential` |
+| `wazers-loader-seen` | mobile splash already handled |
 
 ---
 
-## Security notes
+## Mobile splash loader (optional UX)
 
-- Pure static site → no server-side code, no database, no PHP
-- No user input is processed on the server
-- Only expected third-party scripts: Tailwind CDN, Google Fonts, Facebook SDK
-- Keep HTTPS enabled (you already have SSL on Garmtech)
-- Form is completely client-side until you add Formspree
-- No passwords, API keys or sensitive data are stored in the code
+Shown only when **all** of these are true:
 
----
+1. First visit in this browser (`wazers-loader-seen` not set)  
+2. Mobile viewport (≤ 768px)  
+3. Page still loading after ~300 ms  
 
-## File structure
+Then: logo + “Waze Latvija” + “Ielādē… / Loading…” for at least ~0.9 s, then fade out.  
+Desktop or fast loads skip the splash but still mark the visit.
 
-```
-wazers-lv/
-├── index.html              ← Homepage (Galvena)
-├── jaunumi.html            ← News + Facebook feed
-├── notikumi.html           ← Events
-├── svariga.html            ← Important information
-├── palidziba.html          ← Help / FAQ
-├── kontakts.html           ← Contact form
-├── maintenance.html        ← Work in Progress page
-├── 404.html                ← Error page
-├── css/
-│   └── style.css
-├── js/
-│   ├── config.js           ← ← EDIT THIS FILE for maintenance & Formspree
-│   └── main.js
-└── README.md
-```
+To test again: clear site data / delete `wazers-loader-seen`, use mobile width + throttled network.
 
 ---
 
+## Logo & banner images
 
-## CSS class structure (short & clear)
+### Logo (`assets/logo.jpg`)
+
+- Used in **header** and **footer** (round crop via CSS)
+- Filename must be exactly: `logo.jpg`
+- Recommended: roughly square; displayed ~40px (header) / ~32px (footer)
+
+### Banner (`assets/hero.jpg`)
+
+- Homepage hero background
+- Title/subtitle use a white outline so text stays readable
+- Optional: change path in `index.html` (`background-image: url('assets/hero.jpg')`)
+
+---
+
+## Contact form (Formspree)
+
+Default: opens the visitor’s email client (`mailto`).
+
+Better delivery:
+
+1. Create a form at https://formspree.io  
+2. Copy endpoint `https://formspree.io/f/xxxxxxxx`  
+3. Put it in `js/config.js` → `FORMSPREE_ENDPOINT`  
+4. Upload `config.js`
+
+---
+
+## 404 page
+
+- File: `404.html`  
+- Message: **Kaut kas nogāja greizi** / Something went wrong  
+- Keeps header/footer for navigation  
+- Also declared in `.htaccess`: `ErrorDocument 404 /404.html`  
+- In Plesk you can additionally set Error Pages → 404 → `/404.html`
+
+---
+
+## Domain notes (wazers.lv vs www)
+
+- Prefer **one** canonical address (with or without `www`) and redirect the other.
+- SSL must cover **both** `wazers.lv` and `www.wazers.lv`.
+- DNS: apex (`@`) A record and `www` to the same host.
+- If apex “breaks” while www works, fix DNS/SSL/hosting for the non-www name first.
+
+---
+
+## Security
+
+| Topic | Status |
+|-------|--------|
+| Architecture | Pure static – no PHP, no database, no server-side sessions |
+| HTTPS | Required (SSL on Garmtech) |
+| Secrets in repo | None – no API keys or passwords in code |
+| Forms | Client-side until Formspree; then data goes to Formspree, not your server |
+| Third parties | Tailwind CDN, Google Fonts, Facebook SDK (after consent), App/Play store links |
+| XSS surface | Low – no server-rendered user content; still avoid pasting untrusted HTML into pages |
+| Cookie banner | Reduces non-essential third-party load until consent |
+| Maintenance flag | Client-side redirect only – not a hard lock (source is still downloadable) |
+| `.htaccess` | URL shaping + 404 only; not a full WAF |
+
+**Recommendations:**
+
+- Keep SSL valid for both hostnames  
+- Do not commit real Formspree secrets beyond the public form endpoint  
+- Review Privacy/Cookie texts with a professional if needed for official use  
+- After major uploads, hard-refresh or test in a private window  
+
+---
+
+## Performance (already applied)
+
+- Static files, no build pipeline  
+- Tailwind via CDN; custom CSS kept small  
+- Fonts preconnect  
+- Facebook SDK async + consent-gated  
+- Map iframe `loading="lazy"` where applicable  
+- Image paths under `assets/` only  
+
+---
+
+## CSS class structure (main)
 
 | Class | Purpose |
 |-------|---------|
 | `page` + `page-home` / `page-news` … | Body |
 | `wrap` | Max-width container |
-| `row` / `row-between` / `row-center` | Flex rows |
-| `col` | Flex column |
-| `grid-2` / `grid-3` / `grid-4` | Responsive grids |
-| `site-header` / `site-footer` | Header & footer |
-| `logo` / `nav` / `header-actions` | Header parts |
-| `lang-switch` / `lang-btn` | Language toggle |
-| `menu-btn` / `mobile-menu` | Mobile menu |
+| `row` / `row-between` / `col` | Flex layouts |
+| `grid-2` / `grid-3` / `grid-4` | Grids |
+| `site-header` / `site-footer` | Chrome |
+| `logo` / `nav` / `header-actions` | Header |
+| `lang-switch` / `lang-btn` | Language |
+| `menu-btn` / `mobile-menu` | Mobile nav |
 | `btn` / `btn-blue` / `btn-red` / `btn-sm` / `btn-icon` | Buttons |
-| `main-banner` / `main-banner-title` / `main-banner-subtitle` | Homepage banner |
-| `section-stats` / `section-map` / `section-cards` / `section-partners` | Homepage sections |
-| `stat-num` / `stat-label` | Stats |
-| `card` / `card-icon` / `card-title` / `card-text` | Cards |
-| `event` / `event-date` / `event-body` | Event rows |
-| `badge` / `badge-green` / `badge-amber` / `badge-gray` | Status badges |
+| `btn-store` / `btn-ios` / `btn-android` | Store buttons in modal |
+| `main-banner` / `main-banner-title` / `main-banner-subtitle` | Hero |
+| `section-stats` / `section-map` / `section-cards` / `section-partners` | Homepage blocks |
+| `card` / `event` / `badge-*` | Cards & events |
+| `news-split` / `news-fb` / `news-side` | Jaunumi layout |
 | `page-content` / `page-title` / `page-intro` | Inner pages |
 | `waze-map` | Live map |
-| `form-group` / `form-label` / `form-input` / `form-note` | Forms |
-| `info-box` | Info panels |
-| `footer-grid` / `footer-brand` / `footer-title` / `footer-links` / `footer-copy` | Footer |
-| `text-blue` / `text-red` | Brand colors |
-| `partner-list` / `partner-item` | Partners |
-
-
-## Colors
-
-- **Waze Blue:** `#0099FF`
-- **Latvian Red:** `#9E3039`
-
+| `form-*` / `info-box` | Forms |
+| `modal` / `modal-box` | Download dialog |
+| `cookie-banner` | Consent bar |
+| `site-loader` | Mobile splash |
+| `text-blue` / `text-red` | Brand colours |
 
 ---
 
-## How to add your logo
+## Colours
 
-1. Upload your logo PNG file to the `assets/` folder
-2. Name it exactly: **`logo.jpg`**
-3. It will automatically appear next to “Waze Latvija” in the header on all pages
-4. Recommended size: height around 32–40px (it will be scaled with CSS `h-8`)
-
-If the logo does not appear, check the filename is exactly `logo.jpg` (lowercase) and that it is inside the `assets` folder.
+| Name | Hex | Use |
+|------|-----|-----|
+| Waze Blue | `#0099FF` | Primary actions, links |
+| Latvian Red | `#9E3039` | Accent, secondary buttons |
 
 ---
 
-## How to change the homepage banner background
+## Editing tips
 
-1. Upload your banner image to the `assets/` folder
-2. Name it **`hero.jpg`** (or `hero.png`)
-3. The homepage hero section will use it automatically
+1. **Text / news / events** – edit the relevant `.html` file.  
+2. **Behaviour flags** – only `js/config.js`.  
+3. **Look & layout** – `css/style.css` (prefer existing class names).  
+4. **Language strings** – pairs of `<span data-lang="lv">` / `data-lang="en"`.  
+5. After upload, test LV/EN, dark mode, mobile menu, download modal, and cookie banner in a private window.
 
-You can also edit the background directly in `index.html` – look for the line:
-```html
-style="background-image: url('assets/hero.jpg');"
-```
+---
+
+## Hosting checklist (Garmtech)
+
+- [ ] Files in site root (`httpdocs` / document root)  
+- [ ] `.htaccess` present (hidden files visible)  
+- [ ] `assets/logo.jpg` (and optional `hero.jpg`) uploaded  
+- [ ] SSL for `wazers.lv` and `www.wazers.lv`  
+- [ ] Index file = `index.html`  
+- [ ] Preferred domain set (one host, redirect the other)  
+- [ ] 404 → `/404.html` if the panel has Error Pages  
 
 ---
 

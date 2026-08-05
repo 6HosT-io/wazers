@@ -11,6 +11,80 @@
   <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { waze: '#0099FF', latvia: '#9E3039' } } } }</script>
 </head>
 <body class="page page-privacy">
+
+  <!-- First-visit mobile slow-load splash (per browser) -->
+  <div id="site-loader" class="site-loader" hidden aria-hidden="true">
+    <div class="site-loader-inner">
+      <img src="assets/logo.jpg" alt="" class="site-loader-logo" width="64" height="64">
+      <div class="site-loader-name">
+        <span class="text-blue">Waze</span>
+        <span class="text-red">Latvija</span>
+      </div>
+      <p class="site-loader-text">
+        <span data-lang="lv">Ielādē…</span>
+        <span data-lang="en">Loading…</span>
+      </p>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var KEY = 'wazers-loader-seen';
+    try {
+      if (localStorage.getItem(KEY)) return;
+    } catch (e) { return; }
+
+    var mobile = window.matchMedia('(max-width: 768px)').matches;
+    // Mark first visit handled so desktop / fast loads do not retry later
+    function markSeen() {
+      try { localStorage.setItem(KEY, '1'); } catch (e) {}
+    }
+
+    if (!mobile) {
+      markSeen();
+      return;
+    }
+
+    var loader = document.getElementById('site-loader');
+    if (!loader) { markSeen(); return; }
+
+    var SLOW_MS = 300;
+    var MIN_SHOW_MS = 900;
+    var shownAt = 0;
+    var showTimer = setTimeout(function () {
+      shownAt = Date.now();
+      loader.hidden = false;
+      loader.setAttribute('aria-hidden', 'false');
+      loader.classList.add('is-on');
+      document.documentElement.classList.add('loader-active');
+    }, SLOW_MS);
+
+    function finish() {
+      clearTimeout(showTimer);
+      markSeen();
+      if (!shownAt) {
+        document.documentElement.classList.remove('loader-active');
+        return;
+      }
+      var left = Math.max(0, MIN_SHOW_MS - (Date.now() - shownAt));
+      setTimeout(function () {
+        loader.classList.remove('is-on');
+        loader.classList.add('is-out');
+        document.documentElement.classList.remove('loader-active');
+        setTimeout(function () {
+          loader.hidden = true;
+          loader.setAttribute('aria-hidden', 'true');
+        }, 350);
+      }, left);
+    }
+
+    if (document.readyState === 'complete') {
+      finish();
+    } else {
+      window.addEventListener('load', finish);
+    }
+  })();
+  </script>
+
   <header class="site-header">
     <div class="wrap row-between">
       <a href="/" class="logo">
@@ -20,12 +94,12 @@
         <span class="text-red">Latvija</span>
       </a>
       <nav class="nav">
-        <a href="/"><span data-lang="lv">Galvena</span><span data-lang="en">Home</span></a>
+        <a href="/"><span data-lang="lv">Galvenā</span><span data-lang="en">Home</span></a>
         <a href="/jaunumi"><span data-lang="lv">Jaunumi</span><span data-lang="en">News</span></a>
         <a href="/notikumi"><span data-lang="lv">Notikumi</span><span data-lang="en">Events</span></a>
         <a href="/svariga"><span data-lang="lv">Svarīga Informācija</span><span data-lang="en">Important Info</span></a>
         <a href="/palidziba"><span data-lang="lv">Palīdzība</span><span data-lang="en">Help</span></a>
-        <a href="/kontakts"><span data-lang="lv">Kontakts</span><span data-lang="en">Contact</span></a>
+        <a href="/kontakts"><span data-lang="lv">Kontakti</span><span data-lang="en">Contact</span></a>
       </nav>
       <div class="header-actions">
         <button id="dark-mode-toggle" class="btn-icon" aria-label="Toggle dark mode">🌙</button>
@@ -45,12 +119,12 @@
     <div id="mobile-menu" class="mobile-menu hidden">
       <div class="wrap">
         <nav>
-          <a href="/"><span data-lang="lv">Galvena</span><span data-lang="en">Home</span></a>
+          <a href="/"><span data-lang="lv">Galvenā</span><span data-lang="en">Home</span></a>
           <a href="/jaunumi"><span data-lang="lv">Jaunumi</span><span data-lang="en">News</span></a>
           <a href="/notikumi"><span data-lang="lv">Notikumi</span><span data-lang="en">Events</span></a>
           <a href="/svariga"><span data-lang="lv">Svarīga Informācija</span><span data-lang="en">Important Info</span></a>
           <a href="/palidziba"><span data-lang="lv">Palīdzība</span><span data-lang="en">Help</span></a>
-          <a href="/kontakts"><span data-lang="lv">Kontakts</span><span data-lang="en">Contact</span></a>
+          <a href="/kontakts"><span data-lang="lv">Kontakti</span><span data-lang="en">Contact</span></a>
           <div class="row mt-2">
             <button class="dark-mode-toggle btn-icon">🌙</button>
             <button data-set-lang="lv" class="lang-btn active">LV</button>
@@ -107,10 +181,12 @@
         <div>
           <h4 class="footer-title"><span data-lang="lv">Saites</span><span data-lang="en">Links</span></h4>
           <ul class="footer-links">
-            <li><a href="/">Galvena</a></li>
-            <li><a href="/jaunumi">Jaunumi</a></li>
-            <li><a href="/notikumi">Notikumi</a></li>
-            <li><a href="/kontakts">Kontakts</a></li>
+            <li><a href="/"><span data-lang="lv">Galvenā</span><span data-lang="en">Home</span></a></li>
+            <li><a href="/jaunumi"><span data-lang="lv">Jaunumi</span><span data-lang="en">News</span></a></li>
+            <li><a href="/notikumi"><span data-lang="lv">Notikumi</span><span data-lang="en">Events</span></a></li>
+            <li><a href="/svariga"><span data-lang="lv">Svarīga Informācija</span><span data-lang="en">Important Info</span></a></li>
+            <li><a href="/palidziba"><span data-lang="lv">Palīdzība</span><span data-lang="en">Help</span></a></li>
+            <li><a href="/kontakts"><span data-lang="lv">Kontakti</span><span data-lang="en">Contact</span></a></li>
           </ul>
         </div>
         <div>
@@ -141,7 +217,7 @@
       </p>
       <div class="modal-actions">
         <a href="https://apps.apple.com/us/app/waze-navigation-live-traffic/id323229106" target="_blank" rel="noopener" class="btn btn-store btn-ios">
-          <span class="store-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 15 2.94 8.55 5.48 5.19c1.26-1.67 3.29-2.68 5.17-2.68 1.29 0 2.49.87 3.29.87.81 0 2.33-1.08 3.93-.92.66.03 2.53.26 3.72 1.98-.1.06-2.2 1.28-2.18 3.85.03 3.05 2.65 4.07 2.68 4.08-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg></span>
+          <span class="store-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.495-2.32 1.14-3.04.704-.85 1.994-1.49 3.043-1.49.12 0 .25.02.32.03.01.06.01.17.01.27zm4.63 14.41c-.18.42-.37.82-.58 1.2-.42.76-.86 1.46-1.45 2.05-.5.5-1.05.9-1.75.92-.68.02-1.06-.3-1.7-.3-.66 0-1.07.28-1.75.32-.69.04-1.21-.38-1.72-.88-.95-.96-1.69-2.16-2.14-3.47-1.03-2.98-.26-6.55 1.92-8.34.66-.55 1.49-.9 2.35-.92.72-.02 1.42.37 1.9.37.47 0 1.35-.46 2.28-.39.38.02 1.46.12 2.15 1.18-.06.04-1.28.75-1.27 2.24.02 1.78 1.55 2.37 1.57 2.38-.01.04-.25.86-.82 1.7z"/></svg></span>
           <span class="store-label"><small data-lang="lv">Lejupielādēt no</small><small data-lang="en">Download on the</small><strong>App Store</strong></span>
         </a>
         <a href="https://play.google.com/store/apps/details?id=com.waze&hl=en&pli=1" target="_blank" rel="noopener" class="btn btn-store btn-android">

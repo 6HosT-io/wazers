@@ -11,6 +11,80 @@
   <script>tailwind.config = { darkMode: 'class' }</script>
 </head>
 <body class="page page-maintenance">
+
+  <!-- First-visit mobile slow-load splash (per browser) -->
+  <div id="site-loader" class="site-loader" hidden aria-hidden="true">
+    <div class="site-loader-inner">
+      <img src="assets/logo.jpg" alt="" class="site-loader-logo" width="64" height="64">
+      <div class="site-loader-name">
+        <span class="text-blue">Waze</span>
+        <span class="text-red">Latvija</span>
+      </div>
+      <p class="site-loader-text">
+        <span data-lang="lv">Ielādē…</span>
+        <span data-lang="en">Loading…</span>
+      </p>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var KEY = 'wazers-loader-seen';
+    try {
+      if (localStorage.getItem(KEY)) return;
+    } catch (e) { return; }
+
+    var mobile = window.matchMedia('(max-width: 768px)').matches;
+    // Mark first visit handled so desktop / fast loads do not retry later
+    function markSeen() {
+      try { localStorage.setItem(KEY, '1'); } catch (e) {}
+    }
+
+    if (!mobile) {
+      markSeen();
+      return;
+    }
+
+    var loader = document.getElementById('site-loader');
+    if (!loader) { markSeen(); return; }
+
+    var SLOW_MS = 300;
+    var MIN_SHOW_MS = 900;
+    var shownAt = 0;
+    var showTimer = setTimeout(function () {
+      shownAt = Date.now();
+      loader.hidden = false;
+      loader.setAttribute('aria-hidden', 'false');
+      loader.classList.add('is-on');
+      document.documentElement.classList.add('loader-active');
+    }, SLOW_MS);
+
+    function finish() {
+      clearTimeout(showTimer);
+      markSeen();
+      if (!shownAt) {
+        document.documentElement.classList.remove('loader-active');
+        return;
+      }
+      var left = Math.max(0, MIN_SHOW_MS - (Date.now() - shownAt));
+      setTimeout(function () {
+        loader.classList.remove('is-on');
+        loader.classList.add('is-out');
+        document.documentElement.classList.remove('loader-active');
+        setTimeout(function () {
+          loader.hidden = true;
+          loader.setAttribute('aria-hidden', 'true');
+        }, 350);
+      }, left);
+    }
+
+    if (document.readyState === 'complete') {
+      finish();
+    } else {
+      window.addEventListener('load', finish);
+    }
+  })();
+  </script>
+
   <header class="site-header">
     <div class="wrap row-between">
       <a href="/" class="logo">
