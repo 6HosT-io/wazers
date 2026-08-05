@@ -6,7 +6,7 @@ Fast, clean static website for the **Waze Latvia** community.
 |---|---|
 | **Live site** | https://wazers.lv / https://www.wazers.lv |
 | **Domain** | nic.lv → hosted on **Garmtech** (Plesk) |
-| **Contact** | wazelatvia@gmail.com |
+| **Contact** | wazers@wazers.lv |
 | **Facebook** | https://www.facebook.com/WazeLV |
 | **Stack** | HTML · CSS · vanilla JS · Tailwind CDN · no build step |
 
@@ -81,7 +81,7 @@ wazers-lv/
 const SITE_CONFIG = {
   MAINTENANCE_MODE: false,          // true = redirect everyone to /maintenance
   FACEBOOK_PAGE: 'https://www.facebook.com/WazeLV',
-  CONTACT_EMAIL: 'wazelatvia@gmail.com',
+  CONTACT_EMAIL: 'wazers@wazers.lv',
   FORMSPREE_ENDPOINT: '',           // e.g. 'https://formspree.io/f/xxxxxxxx'
 };
 ```
