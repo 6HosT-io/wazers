@@ -919,3 +919,63 @@ html.dark .cookie-banner {
   object-fit: cover;
   display: block;
 }
+
+
+/* ---------- Site loader (first visit, mobile, slow load) ---------- */
+html.loader-active {
+  overflow: hidden;
+}
+.site-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.site-loader.is-on {
+  opacity: 1;
+  pointer-events: auto;
+}
+.site-loader.is-out {
+  opacity: 0;
+}
+.site-loader-inner {
+  text-align: center;
+  padding: 1.5rem;
+}
+.site-loader-logo {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 0.75rem;
+  box-shadow: 0 4px 16px rgba(0, 153, 255, 0.2);
+}
+.site-loader-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+.site-loader-text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+html.dark .site-loader {
+  background: #0f172a;
+}
+html.dark .site-loader-text {
+  color: #94a3b8;
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-loader {
+    transition: none;
+  }
+}
