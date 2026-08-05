@@ -191,6 +191,20 @@ To test again: clear site data / delete `wazers-loader-seen`, use mobile width +
 
 ---
 
+## Google Analytics 4 (optional, private dashboard)
+
+1. Create a GA4 property at https://analytics.google.com → Admin → Data streams → Web → your URL (`https://wazers.lv`).
+2. Copy the **Measurement ID** (`G-XXXXXXXXXX`).
+3. Put it in `js/config.js`:
+   ```js
+   GA_MEASUREMENT_ID: 'G-XXXXXXXXXX',
+   ```
+4. Upload `config.js` (and updated pages if first time).
+
+- Script loads **only after cookie consent** (“Accept all” / non-essential).
+- Use the **Google Analytics website** for 24h / 7d / 28d reports (page views, popular pages, trends) — not shown on wazers.lv publicly.
+- **MonsterInsights** is a WordPress plugin only; it does **not** work with this static site. Old WordPress files on Plesk do not collect stats for these HTML pages.
+
 ## Contact form (Formspree)
 
 Default: opens the visitor’s email client (`mailto`).
