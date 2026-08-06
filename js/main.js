@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
     langButtons.forEach(b => {
       const on = b.getAttribute('data-set-lang') === lang;
       b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
   }
 
@@ -40,7 +41,12 @@ document.addEventListener('DOMContentLoaded', function () {
     localStorage.setItem('wazers-theme', theme);
     darkToggles.forEach(btn => {
       btn.textContent = theme === 'dark' ? '☀️' : '🌙';
-      btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      const lang = html.getAttribute('lang') || 'lv';
+      if (theme === 'dark') {
+        btn.setAttribute('aria-label', lang === 'en' ? 'Switch to light mode' : 'Pārslēgt uz gaišo režīmu');
+      } else {
+        btn.setAttribute('aria-label', lang === 'en' ? 'Switch to dark mode' : 'Pārslēgt uz tumšo režīmu');
+      }
     });
   }
 
@@ -64,24 +70,65 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // Mobile menu
+  // Mobile menu (accessible disclosure)
   const menuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   if (menuBtn && mobileMenu) {
-    menuBtn.addEventListener('click', () => {
-      const open = mobileMenu.classList.contains('hidden');
-      mobileMenu.classList.toggle('hidden');
-      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      document.body.style.overflow = open ? 'hidden' : '';
-    });
+    const getFocusable = () =>
+      mobileMenu.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])');
+
+    function openMobileMenu() {
+      mobileMenu.classList.remove('hidden');
+      menuBtn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      const focusable = getFocusable();
+      if (focusable.length) {
+        setTimeout(() => focusable[0].focus(), 10);
+      }
+    }
+
+    function closeMobileMenu() {
+      if (mobileMenu.classList.contains('hidden')) return;
+      mobileMenu.classList.add('hidden');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      menuBtn.focus();
+    }
+
+    function toggleMobileMenu() {
+      if (mobileMenu.classList.contains('hidden')) openMobileMenu();
+      else closeMobileMenu();
+    }
+
+    menuBtn.addEventListener('click', toggleMobileMenu);
+
     mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        menuBtn.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      });
+      link.addEventListener('click', () => closeMobileMenu());
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+        e.preventDefault();
+        closeMobileMenu();
+        return;
+      }
+      // Simple focus trap while menu is open
+      if (e.key !== 'Tab' || mobileMenu.classList.contains('hidden')) return;
+      const focusable = Array.from(getFocusable());
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     });
   }
+
+
 
   // Formspree
   const form = document.getElementById('contact-form');
