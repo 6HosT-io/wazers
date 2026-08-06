@@ -224,14 +224,28 @@ html.dark .site-header {
 }
 
 .menu-btn {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
   padding: 0.5rem;
   border: none;
   background: transparent;
   border-radius: 0.5rem;
   cursor: pointer;
+  color: inherit;
 }
 .menu-btn:hover { background: #f1f5f9; }
+.menu-btn:focus-visible,
+.mobile-menu a:focus-visible,
+.mobile-menu .lang-btn:focus-visible,
+.mobile-menu .btn-icon:focus-visible,
+.lang-btn:focus-visible,
+.btn-icon:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
 @media (min-width: 768px) {
   .menu-btn { display: none; }
 }
