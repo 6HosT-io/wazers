@@ -247,11 +247,58 @@ Keep SSL for both `wazers.lv` and `www.wazers.lv`. Prefer one canonical host.
 
 ---
 
+
+## Mobile menu accessibility
+
+The hamburger menu is implemented as an **accessible disclosure** (not a full-screen modal dialog).
+
+### Behaviour
+
+| Action | Result |
+|--------|--------|
+| Open (click / Enter / Space) | Panel opens; `aria-expanded="true"`; body scroll locked; focus moves to first link |
+| Close (link click) | Panel closes; focus returns to menu button |
+| Close (Escape) | Panel closes; focus returns to menu button |
+| Tab while open | Focus cycles inside the panel (simple trap) |
+| Desktop ≥ 768px | Button and panel stay hidden |
+
+### ARIA & markup
+
+| Element | Attributes |
+|---------|------------|
+| Menu button `#mobile-menu-btn` | `type="button"`, `aria-label="Izvēlne"`, `aria-expanded="false\|true"`, `aria-controls="mobile-menu"` |
+| Icon SVG | `aria-hidden="true"`, `focusable="false"` |
+| Panel `#mobile-menu` | Hidden with class `hidden` (`display: none`) when closed |
+| `<nav>` (desktop + mobile) | `aria-label="Galvenā navigācija"` |
+| Active page link | `class="active"` + `aria-current="page"` |
+| Language buttons | `aria-pressed="true\|false"` on LV/EN |
+| Dark mode toggle | LV/EN `aria-label` (“Pārslēgt uz tumšo/gaišo režīmu”) |
+
+### CSS / UX
+
+- Menu button minimum hit area **44×44px**
+- `:focus-visible` outline on menu button, links, and controls
+- Solid panel background (light + dark mode) under the sticky header
+
+### Files involved
+
+- All page HTML headers (button + panel markup)
+- `js/main.js` — open/close, Escape, focus management, `aria-pressed`
+- `css/style.css` — panel layout, touch target, focus styles
+
+### Quick keyboard test
+
+1. Narrow viewport (or phone).
+2. Tab to ☰ → Enter to open.
+3. Tab through links and LV/EN / theme controls.
+4. Escape → menu closes, focus back on ☰.
+
+---
 ## Recent updates (summary)
 
 - Contact email → **wazers@wazers.lv** everywhere  
 - GA4 **G-N73JCDN9NF** via consent-gated `gtag`  
-- Mobile menu solid panel + scroll lock  
+- Mobile menu solid panel + scroll lock + **a11y** (ARIA, Escape, focus trap)  
 - Nav labels: **Galvenā**, **Kontakti**; footer matches full menu  
 - Contact page: “Sazinies ar mums” + updated intro  
 - Map section title: “Waze Tiešsaistes karte”  
