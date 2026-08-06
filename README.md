@@ -8,19 +8,21 @@ Fast, clean static website for the **Waze Latvia** community.
 | **Domain** | nic.lv → hosted on **Garmtech** (Plesk) |
 | **Contact** | wazers@wazers.lv |
 | **Facebook** | https://www.facebook.com/WazeLV |
+| **Analytics** | Google Analytics 4 · `G-N73JCDN9NF` (after cookie consent) |
 | **Stack** | HTML · CSS · vanilla JS · Tailwind CDN · no build step |
 
 ---
 
 ## Features (overview)
 
-- Fully **responsive** (desktop + mobile)
+- Fully **responsive** (desktop + mobile hamburger menu with solid panel)
 - **Bilingual** LV (default) + EN with persistent language switcher
 - **Dark mode** – system preference + manual toggle (saved in `localStorage`)
-- **Live Waze map** embed on homepage
+- **Live Waze map** embed on homepage (“Waze Tiešsaistes karte”)
 - **Facebook** timeline on Jaunumi (loads only after cookie consent)
 - **Download Waze** modal → App Store (iOS) / Google Play (Android)
 - **Cookie consent** banner + Privacy / Cookie policy pages
+- **Google Analytics 4** – private dashboard only; loads after consent
 - **Maintenance mode** (one flag in `js/config.js`)
 - Custom **404** page (“Kaut kas nogāja greizi”)
 - Contact form (mailto by default; Formspree optional)
@@ -45,6 +47,9 @@ Fast, clean static website for the **Waze Latvia** community.
 | `/maintenance` | `maintenance.html` | Work in Progress (when mode is on) |
 | *(any missing)* | `404.html` | Error page |
 
+**Navigation labels (LV):** Galvenā · Jaunumi · Notikumi · Svarīga Informācija · Palīdzība · Kontakti  
+Header and footer **Saites** use the same set of links.
+
 ---
 
 ## File structure
@@ -65,8 +70,8 @@ wazers-lv/
 ├── css/
 │   └── style.css             ← all custom styles
 ├── js/
-│   ├── config.js             ← EDIT: maintenance, Formspree, contacts
-│   └── main.js               ← language, dark mode, menu, cookies, modal
+│   ├── config.js             ← EDIT: maintenance, Formspree, GA, email
+│   └── main.js               ← language, dark mode, menu, cookies, GA, modal
 ├── assets/
 │   ├── logo.jpg              ← header + footer logo (required)
 │   └── hero.jpg              ← homepage banner background (optional)
@@ -79,10 +84,11 @@ wazers-lv/
 
 ```js
 const SITE_CONFIG = {
-  MAINTENANCE_MODE: false,          // true = redirect everyone to /maintenance
+  MAINTENANCE_MODE: false,              // true → redirect to /maintenance
   FACEBOOK_PAGE: 'https://www.facebook.com/WazeLV',
   CONTACT_EMAIL: 'wazers@wazers.lv',
-  FORMSPREE_ENDPOINT: '',           // e.g. 'https://formspree.io/f/xxxxxxxx'
+  FORMSPREE_ENDPOINT: '',               // e.g. 'https://formspree.io/f/xxxxxxxx'
+  GA_MEASUREMENT_ID: 'G-N73JCDN9NF',    // Google Analytics 4
 };
 ```
 
@@ -90,66 +96,32 @@ Upload only this file after changing it.
 
 ---
 
-## Clean URLs
+## Google Analytics 4
 
-`.htaccess` provides:
+| Item | Detail |
+|------|--------|
+| Measurement ID | `G-N73JCDN9NF` |
+| Load method | Injected by `main.js` **only after cookie consent** (not hardcoded in every `<head>`) |
+| Public site | No live stats on the website |
+| Dashboard | https://analytics.google.com → Reports → Realtime / standard reports |
+| First data | Can take up to ~30 minutes after first consented visit |
 
-| Request | Result |
-|---------|--------|
-| `/index.html` | → `/` |
-| `/jaunumi.html` | → `/jaunumi` |
-| `/jaunumi` | serves `jaunumi.html` |
+**Verify:** Accept cookies on the site → GA4 → **Reports → Realtime**.
 
-**Setup (Garmtech / Plesk + Apache):**
+**Note:** WordPress plugins (e.g. MonsterInsights) do **not** apply to this static site. Old WordPress files on Plesk do not track these HTML pages.
 
-1. Upload `.htaccess` to the **site root** (same folder as `index.html`).
-2. Show hidden files in the file manager if needed.
-3. **Index files** → custom value: `index.html`
-4. Prefer HTTPS and one canonical host (`wazers.lv` **or** `www.wazers.lv`).
-
-If the panel only offers limited Apache options, `.htaccess` is still the main tool.  
-If hosting is **Nginx-only**, add something like:
-
-```nginx
-location / {
-  try_files $uri $uri.html $uri/ /index.html;
-}
-error_page 404 /404.html;
-```
+Privacy / Cookie policy pages mention GA as a non-essential third party.
 
 ---
 
-## Maintenance mode
+## Cookie consent & legal
 
-1. Open `js/config.js`
-2. Set `MAINTENANCE_MODE: true`
-3. Upload the file
+- Banner: Accept all / I agree to non-essential cookies / More info  
+- Stored in `localStorage` (`wazers-cookie-consent`)  
+- Gates **Facebook** embed and **Google Analytics**  
+- Footer **Legal** → `/privacy` and `/cookies`  
 
-Visitors are redirected to `/maintenance` (Facebook link + email).  
-Set back to `false` to reopen the site.
-
----
-
-## Download Waze modal
-
-Header and homepage **Lejupielādēt / Download** open a small dialog:
-
-- **App Store (iOS)** → Apple link  
-- **Google Play (Android)** → Play Store link  
-
-Close with ×, backdrop click, or Escape. Present on all main pages.
-
----
-
-## Cookie consent & legal pages
-
-- Banner on first visit (bottom): **Accept all** / **I agree to non-essential cookies** / **More info**
-- Choice stored in `localStorage` (`wazers-cookie-consent`)
-- Facebook embed on **Jaunumi** loads only after consent
-- Footer **Legal** section → `/privacy` and `/cookies`
-- Policy texts are **community templates**, not legal advice
-
-**localStorage keys used by the site:**
+**localStorage keys:**
 
 | Key | Purpose |
 |-----|---------|
@@ -160,80 +132,61 @@ Close with ×, backdrop click, or Escape. Present on all main pages.
 
 ---
 
-## Mobile splash loader (optional UX)
+## Mobile menu
 
-Shown only when **all** of these are true:
-
-1. First visit in this browser (`wazers-loader-seen` not set)  
-2. Mobile viewport (≤ 768px)  
-3. Page still loading after ~300 ms  
-
-Then: logo + “Waze Latvija” + “Ielādē… / Loading…” for at least ~0.9 s, then fade out.  
-Desktop or fast loads skip the splash but still mark the visit.
-
-To test again: clear site data / delete `wazers-loader-seen`, use mobile width + throttled network.
+- Hamburger opens a **full-width solid panel** under the sticky header  
+- Links + dark mode + LV/EN inside the panel  
+- Body scroll locked while open  
+- Hidden on desktop (≥ 768px)  
+- Files: `css/style.css` + `js/main.js`
 
 ---
 
-## Logo & banner images
+## Clean URLs
 
-### Logo (`assets/logo.jpg`)
+`.htaccess` provides `/page` instead of `/page.html`.
 
-- Used in **header** and **footer** (round crop via CSS)
-- Filename must be exactly: `logo.jpg`
-- Recommended: roughly square; displayed ~40px (header) / ~32px (footer)
-
-### Banner (`assets/hero.jpg`)
-
-- Homepage hero background
-- Title/subtitle use a white outline so text stays readable
-- Optional: change path in `index.html` (`background-image: url('assets/hero.jpg')`)
+Upload `.htaccess` to the site root. Index file = `index.html`.  
+If Nginx-only, use equivalent `try_files` rules (see hosting notes below).
 
 ---
 
-## Google Analytics 4 (optional, private dashboard)
+## Maintenance mode
 
-1. Create a GA4 property at https://analytics.google.com → Admin → Data streams → Web → your URL (`https://wazers.lv`).
-2. Copy the **Measurement ID** (`G-XXXXXXXXXX`).
-3. Put it in `js/config.js`:
-   ```js
-   GA_MEASUREMENT_ID: 'G-XXXXXXXXXX',
-   ```
-4. Upload `config.js` (and updated pages if first time).
+1. `js/config.js` → `MAINTENANCE_MODE: true`  
+2. Upload → visitors go to `/maintenance`  
+3. Set back to `false` to reopen  
 
-- Script loads **only after cookie consent** (“Accept all” / non-essential).
-- Use the **Google Analytics website** for 24h / 7d / 28d reports (page views, popular pages, trends) — not shown on wazers.lv publicly.
-- **MonsterInsights** is a WordPress plugin only; it does **not** work with this static site. Old WordPress files on Plesk do not collect stats for these HTML pages.
+---
+
+## Download Waze modal
+
+Header / homepage **Lejupielādēt** opens App Store + Google Play links.  
+Close with ×, backdrop, or Escape.
+
+---
 
 ## Contact form (Formspree)
 
-Default: opens the visitor’s email client (`mailto`).
-
-Better delivery:
-
-1. Create a form at https://formspree.io  
-2. Copy endpoint `https://formspree.io/f/xxxxxxxx`  
-3. Put it in `js/config.js` → `FORMSPREE_ENDPOINT`  
-4. Upload `config.js`
+Default: `mailto:wazers@wazers.lv`.  
+Optional: set `FORMSPREE_ENDPOINT` in `config.js` after creating a form at formspree.io.
 
 ---
 
-## 404 page
+## Logo & banner
 
-- File: `404.html`  
-- Message: **Kaut kas nogāja greizi** / Something went wrong  
-- Keeps header/footer for navigation  
-- Also declared in `.htaccess`: `ErrorDocument 404 /404.html`  
-- In Plesk you can additionally set Error Pages → 404 → `/404.html`
+| File | Use |
+|------|-----|
+| `assets/logo.jpg` | Header + footer (round) |
+| `assets/hero.jpg` | Homepage hero background |
 
 ---
 
-## Domain notes (wazers.lv vs www)
+## Mobile splash loader (optional UX)
 
-- Prefer **one** canonical address (with or without `www`) and redirect the other.
-- SSL must cover **both** `wazers.lv` and `www.wazers.lv`.
-- DNS: apex (`@`) A record and `www` to the same host.
-- If apex “breaks” while www works, fix DNS/SSL/hosting for the non-www name first.
+Shown only when: first visit in this browser **and** mobile **and** load slower than ~300 ms.  
+Logo + “Waze Latvija” + “Ielādē… / Loading…”.  
+Host WAF pages (“Please wait while your request is being verified…”) are **not** this loader — contact Garmtech/Imunify360 if those appear often.
 
 ---
 
@@ -241,33 +194,25 @@ Better delivery:
 
 | Topic | Status |
 |-------|--------|
-| Architecture | Pure static – no PHP, no database, no server-side sessions |
+| Architecture | Pure static – no PHP, no database |
 | HTTPS | Required (SSL on Garmtech) |
-| Secrets in repo | None – no API keys or passwords in code |
-| Forms | Client-side until Formspree; then data goes to Formspree, not your server |
-| Third parties | Tailwind CDN, Google Fonts, Facebook SDK (after consent), App/Play store links |
-| XSS surface | Low – no server-rendered user content; still avoid pasting untrusted HTML into pages |
-| Cookie banner | Reduces non-essential third-party load until consent |
-| Maintenance flag | Client-side redirect only – not a hard lock (source is still downloadable) |
-| `.htaccess` | URL shaping + 404 only; not a full WAF |
+| Secrets in repo | None |
+| Analytics / Facebook | Only after consent |
+| Forms | Client-side or Formspree |
+| Maintenance flag | Client-side redirect only |
 
-**Recommendations:**
-
-- Keep SSL valid for both hostnames  
-- Do not commit real Formspree secrets beyond the public form endpoint  
-- Review Privacy/Cookie texts with a professional if needed for official use  
-- After major uploads, hard-refresh or test in a private window  
+Keep SSL for both `wazers.lv` and `www.wazers.lv`. Prefer one canonical host.
 
 ---
 
 ## Performance (already applied)
 
 - Static files, no build pipeline  
-- Tailwind via CDN; custom CSS kept small  
+- Tailwind CDN + small custom CSS  
 - Fonts preconnect  
 - Facebook SDK async + consent-gated  
-- Map iframe `loading="lazy"` where applicable  
-- Image paths under `assets/` only  
+- GA consent-gated  
+- Map iframe lazy where applicable  
 
 ---
 
@@ -277,56 +222,41 @@ Better delivery:
 |-------|---------|
 | `page` + `page-home` / `page-news` … | Body |
 | `wrap` | Max-width container |
-| `row` / `row-between` / `col` | Flex layouts |
-| `grid-2` / `grid-3` / `grid-4` | Grids |
 | `site-header` / `site-footer` | Chrome |
-| `logo` / `nav` / `header-actions` | Header |
-| `lang-switch` / `lang-btn` | Language |
-| `menu-btn` / `mobile-menu` | Mobile nav |
-| `btn` / `btn-blue` / `btn-red` / `btn-sm` / `btn-icon` | Buttons |
-| `btn-store` / `btn-ios` / `btn-android` | Store buttons in modal |
-| `main-banner` / `main-banner-title` / `main-banner-subtitle` | Hero |
-| `section-stats` / `section-map` / `section-cards` / `section-partners` | Homepage blocks |
-| `card` / `event` / `badge-*` | Cards & events |
-| `news-split` / `news-fb` / `news-side` | Jaunumi layout |
-| `page-content` / `page-title` / `page-intro` | Inner pages |
-| `waze-map` | Live map |
-| `form-*` / `info-box` | Forms |
-| `modal` / `modal-box` | Download dialog |
-| `cookie-banner` | Consent bar |
-| `site-loader` | Mobile splash |
+| `logo` / `nav` / `header-actions` / `menu-btn` / `mobile-menu` | Header & mobile nav |
+| `btn` / `btn-blue` / `btn-red` / `btn-store` / `btn-ios` / `btn-android` | Buttons |
+| `main-banner` / `section-*` / `card` / `news-split` | Content blocks |
+| `modal` / `cookie-banner` / `site-loader` | Overlays |
 | `text-blue` / `text-red` | Brand colours |
 
----
-
-## Colours
-
-| Name | Hex | Use |
-|------|-----|-----|
-| Waze Blue | `#0099FF` | Primary actions, links |
-| Latvian Red | `#9E3039` | Accent, secondary buttons |
-
----
-
-## Editing tips
-
-1. **Text / news / events** – edit the relevant `.html` file.  
-2. **Behaviour flags** – only `js/config.js`.  
-3. **Look & layout** – `css/style.css` (prefer existing class names).  
-4. **Language strings** – pairs of `<span data-lang="lv">` / `data-lang="en"`.  
-5. After upload, test LV/EN, dark mode, mobile menu, download modal, and cookie banner in a private window.
+**Colours:** Waze Blue `#0099FF` · Latvian Red `#9E3039`
 
 ---
 
 ## Hosting checklist (Garmtech)
 
-- [ ] Files in site root (`httpdocs` / document root)  
-- [ ] `.htaccess` present (hidden files visible)  
-- [ ] `assets/logo.jpg` (and optional `hero.jpg`) uploaded  
-- [ ] SSL for `wazers.lv` and `www.wazers.lv`  
-- [ ] Index file = `index.html`  
-- [ ] Preferred domain set (one host, redirect the other)  
-- [ ] 404 → `/404.html` if the panel has Error Pages  
+- [ ] Files in site root  
+- [ ] `.htaccess` present  
+- [ ] `assets/logo.jpg` (+ optional `hero.jpg`)  
+- [ ] SSL for apex and `www`  
+- [ ] Index = `index.html`  
+- [ ] Preferred domain / redirect  
+- [ ] 404 → `/404.html`  
+- [ ] Mailbox **wazers@wazers.lv** active or forwarded  
+- [ ] `config.js` uploaded with GA ID  
+
+---
+
+## Recent updates (summary)
+
+- Contact email → **wazers@wazers.lv** everywhere  
+- GA4 **G-N73JCDN9NF** via consent-gated `gtag`  
+- Mobile menu solid panel + scroll lock  
+- Nav labels: **Galvenā**, **Kontakti**; footer matches full menu  
+- Contact page: “Sazinies ar mums” + updated intro  
+- Map section title: “Waze Tiešsaistes karte”  
+- Apple App Store icon (Font Awesome path)  
+- Privacy / Cookie policies mention GA  
 
 ---
 
