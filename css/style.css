@@ -141,16 +141,15 @@ a { color: inherit; }
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 100;
   background: #ffffff;
-  backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
 }
 html.dark .site-header {
-  background: rgba(15, 23, 42, 0.98);
+  background: #0f172a;
 }
 
-.site-header .wrap {
+.site-header > .wrap {
   height: 4rem;
   display: flex;
   align-items: center;
@@ -251,55 +250,82 @@ html.dark .site-header {
 }
 
 .mobile-menu {
-  display: none;
+  display: none !important;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
   width: 100%;
-  background: #fff;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
-  padding: 0.75rem 0 1rem;
-  position: relative;
-  z-index: 60;
+  margin: 0;
+  padding: 0.5rem 0 1rem;
+  background-color: #ffffff !important;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+  z-index: 110;
+  max-height: min(75vh, 520px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .mobile-menu.open,
 .mobile-menu:not(.hidden) {
-  display: block;
+  display: block !important;
 }
 .mobile-menu .wrap {
   display: block;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 .mobile-menu nav {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.15rem;
   font-size: 0.9375rem;
   font-weight: 500;
+  background: #ffffff;
 }
 .mobile-menu a {
   display: block;
-  padding: 0.75rem 0.75rem;
+  padding: 0.85rem 0.75rem;
   border-radius: 0.5rem;
   text-decoration: none;
-  color: #0f172a;
+  color: #0f172a !important;
+  background-color: transparent;
 }
-.mobile-menu a:hover { background: #f8fafc; }
+.mobile-menu a:hover { background: #f1f5f9; }
 .mobile-menu a.active {
-  background: rgba(0,153,255,0.1);
-  color: var(--blue);
+  background: rgba(0, 153, 255, 0.12);
+  color: #0099FF !important;
 }
 .mobile-menu .row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   margin-top: 0.5rem;
-  padding: 0.5rem 0.75rem 0;
-  border-top: 1px solid var(--border);
+  padding: 0.75rem 0.75rem 0.25rem;
+  border-top: 1px solid #e2e8f0;
   flex-wrap: wrap;
 }
-html.dark .mobile-menu {
-  background: var(--dark2);
+html.dark .mobile-menu,
+html.dark .mobile-menu nav {
+  background-color: #0f172a !important;
   border-color: #334155;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 html.dark .mobile-menu a {
-  color: #e2e8f0;
+  color: #e2e8f0 !important;
+}
+html.dark .mobile-menu a:hover {
+  background: #1e293b !important;
+}
+html.dark .mobile-menu a.active {
+  background: rgba(0, 153, 255, 0.15) !important;
+  color: #38bdf8 !important;
+}
+html.dark .mobile-menu .row {
+  border-color: #334155;
 }
 @media (min-width: 768px) {
   .mobile-menu {
